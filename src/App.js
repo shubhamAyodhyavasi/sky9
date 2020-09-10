@@ -21,8 +21,9 @@ function App() {
   const classes = useStyles();
   return (
     <div className="App">
-      <Button className={classes.root}>
-        Hello World
+      <Button className={classes.root} >
+        Hello World {process.env.REACT_APP_ROOT_DIR
+        }
       </Button>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
