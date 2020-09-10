@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/shubhamAyodhyavasi.github.io/sky9/static/css/main.5f361e03.chunk.css",
+    "main.js": "/shubhamAyodhyavasi.github.io/sky9/static/js/main.08576c5d.chunk.js",
+    "main.js.map": "/shubhamAyodhyavasi.github.io/sky9/static/js/main.08576c5d.chunk.js.map",
+    "runtime-main.js": "/shubhamAyodhyavasi.github.io/sky9/static/js/runtime-main.3d557256.js",
+    "runtime-main.js.map": "/shubhamAyodhyavasi.github.io/sky9/static/js/runtime-main.3d557256.js.map",
+    "static/js/2.4deb36aa.chunk.js": "/shubhamAyodhyavasi.github.io/sky9/static/js/2.4deb36aa.chunk.js",
+    "static/js/2.4deb36aa.chunk.js.map": "/shubhamAyodhyavasi.github.io/sky9/static/js/2.4deb36aa.chunk.js.map",
+    "index.html": "/shubhamAyodhyavasi.github.io/sky9/index.html",
+    "precache-manifest.34ea773be9c83be6b15bade5c0c43e2d.js": "/shubhamAyodhyavasi.github.io/sky9/precache-manifest.34ea773be9c83be6b15bade5c0c43e2d.js",
+    "service-worker.js": "/shubhamAyodhyavasi.github.io/sky9/service-worker.js",
+    "static/css/main.5f361e03.chunk.css.map": "/shubhamAyodhyavasi.github.io/sky9/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.4deb36aa.chunk.js.LICENSE.txt": "/shubhamAyodhyavasi.github.io/sky9/static/js/2.4deb36aa.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/shubhamAyodhyavasi.github.io/sky9/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3d557256.js",
+    "static/js/2.4deb36aa.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.08576c5d.chunk.js"
+  ]
+}
