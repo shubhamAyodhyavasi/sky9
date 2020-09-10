@@ -25,9 +25,7 @@ export default function Menu({menuDrawer,setMenuDrawer}) {
   
   const list = (anchor='left') => (
     <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
+      className={clsx(classes.list)}
       role="presentation"
       //onClick={setMenuDrawer(false)}
       //onKeyDown={setMenuDrawer(false)}
@@ -41,14 +39,7 @@ export default function Menu({menuDrawer,setMenuDrawer}) {
         ))}
       </List>
       <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+      
     </div>
   );
 
