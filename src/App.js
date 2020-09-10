@@ -1,5 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
+import { Route, Switch, withRouter } from "react-router-dom";
+import { connect } from 'react-redux'
 import './App.css';
 
 function App() {
@@ -19,8 +21,22 @@ function App() {
           Learn React
         </a>
       </header>
+      <Switch>
+          <Route
+            path="/"
+            exact
+            component={_props => <div >Home</div>}
+          />
+      </Switch>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  user: state.user,
+});
+export default withRouter(
+  connect(
+    mapStateToProps,
+  )(App)
+);
