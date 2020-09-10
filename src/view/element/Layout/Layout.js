@@ -110,7 +110,7 @@ export default function Layout({children}) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Persistent drawer
+            Logo
           </Typography>
         </Toolbar>
       </AppBar>
