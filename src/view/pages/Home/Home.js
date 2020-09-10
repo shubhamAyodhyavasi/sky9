@@ -3,7 +3,7 @@ import Layout from '../../element/Layout'
 function Home() {
   return (
        <Layout >
-           <p>dshhsdkjh</p>
+           <p>hello in home page</p>
        </Layout>
   );
 }
