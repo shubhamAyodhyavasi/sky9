@@ -1,8 +1,8 @@
 import React from 'react';
 import Layout from '../../element/Layout'
-import TopSlider from './TopSlider'
-import Slides from '../../element/Slides'
+import Slides from '../../element/Sliders/Slides/Slides'
 import AlbumCart from '../../element/AlbumCart'
+import {BannerSlider} from '../../element/Sliders'
 const albumDetails={
   title:"title",
   id:"12",
@@ -10,27 +10,29 @@ const albumDetails={
   totalView:"10",
   img:"https://akamaividz2.zee5.com/image/upload/w_1337,h_536,c_scale,f_auto,q_auto/resources/0-0-214663/cover/1170x658withlogo_756173185.jpg"
 }
+
+const bannerItem = [
+  {
+    title: 'Games of thrones',
+    description: 'safd askdfjksdjaf sad fjsfj lks ',
+    img: 'https://www.hjackets.com/blog/wp-content/uploads/2017/11/game-of-thrones-s-4-banner.jpg'
+  },
+  {
+    title: 'test',
+    description: 'safd askdfjksdjaf sad fjsfj lks ',
+    img: 'https://via.placeholder.com/400x500'
+  },
+  {
+    title: 'test',
+    description: 'safd askdfjksdjaf sad fjsfj lks ',
+    img: 'https://via.placeholder.com/400x500'
+  },
+]
 function Home() {
-  const bannerItem = [
-    {
-      name: 'test',
-      description: 'safd askdfjksdjaf sad fjsfj lks ',
-      image: 'http//via.placeholder.com/400x500'
-    },
-    {
-      name: 'test',
-      description: 'safd askdfjksdjaf sad fjsfj lks ',
-      image: 'http//via.placeholder.com/400x500'
-    },
-    {
-      name: 'test',
-      description: 'safd askdfjksdjaf sad fjsfj lks ',
-      image: 'http//via.placeholder.com/400x500'
-    },
-  ]
   return (
        <Layout >
            {/* <TopSlider /> */}
+           <BannerSlider items={bannerItem} />
            <Slides title="title for slides" />
           
            <AlbumCart albumDetails={albumDetails} />

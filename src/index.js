@@ -4,11 +4,14 @@ import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { BrowserRouter } from "react-router-dom";
+import {MuiThemeProvider, CssBaseline} from '@material-ui/core'
 
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from "./services/redux/config/configureStore";
+
+import theme from './constants/theme';
 
 const persistantStore = store();
 
@@ -17,7 +20,10 @@ ReactDOM.render(
     <Provider store={persistantStore.store}>
       <PersistGate loading={null} persistor={persistantStore.persistor}>
           <BrowserRouter basename={process.env.REACT_APP_ROOT_DIR} >
+            <MuiThemeProvider theme={theme}>
+              <CssBaseline />
               <App />
+            </MuiThemeProvider>
           </BrowserRouter>
       </PersistGate>
     </Provider>

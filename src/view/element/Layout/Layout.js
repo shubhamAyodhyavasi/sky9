@@ -1,9 +1,7 @@
 import React from 'react';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Header from '../Header'
-const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
   },
   content: {
+    width: '100%',
     flexGrow: 1,
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
@@ -43,12 +42,11 @@ export default function Layout({children}) {
     <div className={classes.root}>
       <CssBaseline />
       <Header />
-      <main
-        className={classes.content}
-      >
+      <div className="container">
         <div className={classes.drawerHeader} />
+        <div className="p-3"></div>
         {children}
-      </main>
+      </div>
     </div>
   );
 }

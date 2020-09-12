@@ -1,10 +1,9 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -70,13 +69,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
-  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  // eslint-disable-next-line no-unused-vars
   const handleDrawerOpen = () => {
     setOpen(true);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleDrawerClose = () => {
     setOpen(false);
   };
@@ -97,10 +97,10 @@ export default function Header() {
           </Typography>
           <div className="navigation-menu">
               <ul>
-                  <li><a>Home</a></li>
-                  <li><a>Movie</a></li>
-                  <li><a>Show</a></li>
-                  <li><a>Home</a></li>
+                  <li><a href={"#/"} >Home</a></li>
+                  <li><a href={"#/"} >Movie</a></li>
+                  <li><a href={"#/"} >Show</a></li>
+                  <li><a href={"#/"} >Home</a></li>
               </ul>
           </div>
           <div className="navigation-menu-user">

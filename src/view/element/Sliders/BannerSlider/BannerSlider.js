@@ -1,34 +1,30 @@
 import React from 'react'
-import { Paper, Button } from '@material-ui/core'
-import Carousel from 'react-material-ui-carousel'
+import Slider from "react-slick";
+import BannerCard from '../../BannerCard/BannerCard';
 
-function BannerSlider({items, ...rest}) {
+function BannerSlider({items}) {
+
+  const sliderConfig = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  }
   return (
-    <div>
-      <Carousel {...rest}>
+    <div className="banner-slider">
+      <Slider {...sliderConfig} >
         {
-          items.map((item, i) => <BannerSlide key={i} item={item} />)
+          items.map((item, key) => <BannerCard key={key} {...item} />)
         }
-      </Carousel>
+      </Slider>
     </div>
   )
 }
 
-const BannerSlide = (props) => {
-  return (
-    <Paper style={{
-      height: 400,
-      padding: 50,
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'flex-end',
-      backgroundColor: 'lightseagreen',
-      backgroundImage: `url${props.item.image}`,
-      textAlign: 'center'
-    }} >
-      <h2>{props.item.name}</h2>
-      <p>{props.item.description}</p>
-    </Paper>
-  )
+BannerSlider.defaultProps = {
+  items: []
 }
-export default BannerSlider
+
+export default BannerSlider;
+
