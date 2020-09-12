@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/sky9/static/css/main.18e2f0cf.chunk.css",
-    "main.js": "/sky9/static/js/main.1f8bd775.chunk.js",
-    "main.js.map": "/sky9/static/js/main.1f8bd775.chunk.js.map",
+    "main.js": "/sky9/static/js/main.f2551139.chunk.js",
+    "main.js.map": "/sky9/static/js/main.f2551139.chunk.js.map",
     "runtime-main.js": "/sky9/static/js/runtime-main.94e5d355.js",
     "runtime-main.js.map": "/sky9/static/js/runtime-main.94e5d355.js.map",
-    "static/js/2.889c360a.chunk.js": "/sky9/static/js/2.889c360a.chunk.js",
-    "static/js/2.889c360a.chunk.js.map": "/sky9/static/js/2.889c360a.chunk.js.map",
+    "static/js/2.944de975.chunk.js": "/sky9/static/js/2.944de975.chunk.js",
+    "static/js/2.944de975.chunk.js.map": "/sky9/static/js/2.944de975.chunk.js.map",
     "index.html": "/sky9/index.html",
-    "precache-manifest.127b51a8edb8720e093be3e2c56d176f.js": "/sky9/precache-manifest.127b51a8edb8720e093be3e2c56d176f.js",
+    "precache-manifest.2c96bf95ab3e5814811929d57a8b8487.js": "/sky9/precache-manifest.2c96bf95ab3e5814811929d57a8b8487.js",
     "service-worker.js": "/sky9/service-worker.js",
     "static/css/main.18e2f0cf.chunk.css.map": "/sky9/static/css/main.18e2f0cf.chunk.css.map",
-    "static/js/2.889c360a.chunk.js.LICENSE.txt": "/sky9/static/js/2.889c360a.chunk.js.LICENSE.txt",
+    "static/js/2.944de975.chunk.js.LICENSE.txt": "/sky9/static/js/2.944de975.chunk.js.LICENSE.txt",
     "static/media/App.scss": "/sky9/static/media/slick.f97e3bbf.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.94e5d355.js",
-    "static/js/2.889c360a.chunk.js",
+    "static/js/2.944de975.chunk.js",
     "static/css/main.18e2f0cf.chunk.css",
-    "static/js/main.1f8bd775.chunk.js"
+    "static/js/main.f2551139.chunk.js"
   ]
 }
