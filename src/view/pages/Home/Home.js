@@ -1,12 +1,15 @@
 import React from 'react';
 import Layout from '../../element/Layout'
-import BannerSlider from '../../element/Sliders/BannerSlider/BannerSlider'
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-
+import TopSlider from './TopSlider'
+import Slides from '../../element/Slides'
+import AlbumCart from '../../element/AlbumCart'
+const albumDetails={
+  title:"title",
+  id:"12",
+  details:"Each  has an image container, this is because you need the image to scale and move, we want the scaling to have a smooth transition. However if you add ...",
+  totalView:"10",
+  img:"https://akamaividz2.zee5.com/image/upload/w_1337,h_536,c_scale,f_auto,q_auto/resources/0-0-214663/cover/1170x658withlogo_756173185.jpg"
+}
 function Home() {
   const bannerItem = [
     {
@@ -27,16 +30,10 @@ function Home() {
   ]
   return (
        <Layout >
-         <BannerSlider navButtonsAlwaysVisible={true} items={bannerItem} />
-         <h2>Top Shows on Sky9</h2>
-         <Card>
-           <CardActionArea>
-            <CardMedia
-              image="http://via.placeholder.com/200x200"
-              title="Contemplative Reptile"
-            />
-           </CardActionArea>
-         </Card>
+           {/* <TopSlider /> */}
+           <Slides title="title for slides" />
+          
+           <AlbumCart albumDetails={albumDetails} />
        </Layout>
   );
 }

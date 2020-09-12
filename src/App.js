@@ -3,6 +3,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 
 import { connect } from 'react-redux'
 import Home from './view/pages/Home'
+import Album from './view/pages/Album'
 import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
 const useStyles = makeStyles({
@@ -27,6 +28,11 @@ function App() {
             path="/"
             exact
             component={_props => <Home/>}
+          />
+          <Route
+            path="/album"
+            
+            component={_props => <Album/>}
           />
       </Switch>
     </div>
