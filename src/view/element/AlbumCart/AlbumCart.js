@@ -9,12 +9,9 @@ export default function AlbumCart({ albumDetails }) {
         <div onClick={()=>{console.log('calling url')}} className="album-cart-wrapper" style={{
             backgroundImage: `url(${img})`,
         }}>
+            {totalView}
             <div className="album-cart-wrapper-footer">
                 <h3>{title}</h3>
-                <Badge badgeContent={totalView} color="primary" vertical='bottom'
-                    horizontal='right'>
-                    <Visibility />
-                </Badge>
             </div>
         </div>
     );
