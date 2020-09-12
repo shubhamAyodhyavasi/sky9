@@ -13,7 +13,7 @@ const albumDetails={
 function Home() {
   return (
        <Layout >
-           <TopSlider />
+           {/* <TopSlider /> */}
            <Slides title="title for slides" />
           
            <AlbumCart albumDetails={albumDetails} />
