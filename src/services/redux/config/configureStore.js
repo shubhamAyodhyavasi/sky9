@@ -15,8 +15,9 @@ const middlewares = [
         whitelist: [
             "user"
         ]
-    })
-]
+    }),
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+].filter(Boolean)
 
 const persistConfig = {
     key: "root",
@@ -46,7 +47,6 @@ const persistedReducer = persistReducer(persistConfig, allReducers);
 export default () => {
     let store = createStore(
       persistedReducer,
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
       undefined,
       compose(applyMiddleware(...middlewares))
     );

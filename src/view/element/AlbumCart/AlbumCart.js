@@ -1,15 +1,21 @@
 import React from 'react';
-import "./AlbumCart.scss"
+import { useHistory} from 'react-router-dom'
+import "./AlbumCart.scss";
 
 export default function AlbumCart({ albumDetails }) {
-    const { title, img, totalView } = albumDetails
+    const { title, img, totalView, id } = albumDetails
+    const history = useHistory();
     return (
-        <div onClick={()=>{console.log('calling url')}} className="album-cart-wrapper" style={{
+        <div className="album-cart-wrapper" style={{
             backgroundImage: `url(${img})`,
         }}>
             {totalView}
             <div className="album-cart-wrapper-footer">
-                <h3>{title}</h3>
+                <h3 style={{
+                    cursor: 'pointer'
+                }} onClick={()=>{
+                    history.push(`/video/${id}`)
+                }}  >{title}</h3>
             </div>
         </div>
     );

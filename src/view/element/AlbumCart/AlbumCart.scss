@@ -8,10 +8,18 @@
     margin-bottom: 25px;
     border-radius: 5px;
     position: relative;
+    background-size: cover;
+    &:hover{
+        &:after {
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0,0,0, 0.67) 0%, rgba(0,0,0, 0.40) 100%);
+        }
+    }
 
     
     & > * {
         position: absolute;
+        z-index: 3;
     }
     &:before {
         width: 100%;
@@ -19,11 +27,20 @@
         content: "";
         display: block;
     }
+    &:after {
+        z-index: 0;
+        position: absolute;
+        height: 50%;
+        width: 100%;
+        background: linear-gradient(0deg, rgba(0,0,0, 0.67) 0%, transparent 100%);
+        content: '';
+        bottom: 0;
+    }
 }
 
-.album-cart-wrapper :hover{
-    opacity: 0.5;
-}
+// .album-cart-wrapper :hover{
+//     opacity: 0.5;
+// }
 .album-cart-wrapper-footer {
     bottom: 0;
     display: flex;
@@ -32,7 +49,11 @@
     color: #fff;
     justify-content: space-between;
     width: 100%;
-    
+    h3 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     @media screen and (max-width: 600px) {
         padding: 0x;
     }

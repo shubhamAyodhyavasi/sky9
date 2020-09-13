@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, Link, Button } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import config from '../../../constants/config';
 import {useHistory} from 'react-router-dom';
-import { getDaynamicPostData } from '../../../services/services'
+import { connect } from 'react-redux';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -68,15 +68,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Header() {
-  const [menuData, setMenuData] = useState([])
-  const getData = async () => {
-    const response = await getDaynamicPostData('getCategory', { cat_id: 4 })
-    setMenuData(response?.records)
-  }
-  useEffect(()=> {
-    getData()
-  }, []);
+function Header({menus}) {
   const classes = useStyles();
   const history = useHistory()
   const [open, setOpen] = React.useState(false);
@@ -90,9 +82,6 @@ export default function Header() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  // const goToHome = () => {
-  //   history.push("/")
-  // }
   return (
     <div >
       <AppBar
@@ -113,9 +102,11 @@ export default function Header() {
             <div className="navigation-menu">
               <ul>
                 {
-                  menuData && menuData.map((itm, index) =>
-                    <li className="navigation-menu__item" >
-                      <Button className="navigation-menu__link" >{itm?.title}</Button>
+                  menus.map((itm, index) =>
+                    <li className="navigation-menu__item" key={index} >
+                      <Button onClick={()=> {
+                        itm.cat_id && history.push(`/category/${itm.cat_id}`)
+                      }} className="navigation-menu__link" >{itm?.title}</Button>
                     </li>
                   )
                 }
@@ -142,3 +133,10 @@ export default function Header() {
     </div>
   );
 }
+
+
+const mapStateToProps = state => ({
+  menus: state.app.menus,
+});
+
+export default connect(mapStateToProps)(Header)

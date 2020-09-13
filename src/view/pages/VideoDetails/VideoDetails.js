@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {useParams} from 'react-router-dom'
 import { getDaynamicPostData } from '../../../services/services'
 import Layout from '../../element/Layout'
 import ReactPlayer from 'react-player/lazy'
@@ -7,24 +8,25 @@ import "./VideoDetails.css"
 import config from '../../../constants/config'
 const IMG_URL = config.IMG_URL
 
-function VideoDetails({ album_id }) {
+function VideoDetails() {
     const [albumData, setAlbumData] = useState([])
     const [videoData, setVideoData] = useState([])
-    const getData = async () => {
-        const response = await getDaynamicPostData('getVideoByalbumeId', { album_id: 82 })
+    const {id} = useParams()
+    useEffect(() => {
+        getData(id)
+    }, [id]);
+
+    const getData = async (id) => {
+        if(!id) return
+        const response = await getDaynamicPostData('getVideoByalbumeId', { album_id: id })
         setAlbumData(response?.records && response?.records.length && response?.records)
         setVideoData(response?.records && response?.records.length && response?.records[0])
     }
-    useEffect(() => [
-        getData()
-    ], [album_id]);
-
-
 
     return (
         <Layout >
             {
-                albumData.length &&
+                albumData.length > 0 &&
                 <>
                     <div className="video-player-wrapper">
                         <ReactPlayer

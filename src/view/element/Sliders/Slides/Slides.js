@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Grid, Link } from '@material-ui/core'
+import { Typography, Grid, Button } from '@material-ui/core'
 import Slider from "react-slick";
 import {
     useHistory
@@ -9,7 +9,7 @@ import config from '../../../../constants/config'
 const IMG_URL= config.IMG_URL
 
 export default function Slides({ title, items, allLink }) {
-     const history = useHistory()
+    const history = useHistory()
     const sliderConfig = {
         dots: true,
         infinite: true,
@@ -77,28 +77,31 @@ export default function Slides({ title, items, allLink }) {
 
     return (
         <div className="album-slider">
-            <Grid container spacing={3}>
-                <Grid item xs={6}>
+            <Grid container spacing={3} style={{
+                marginBottom: 10
+            }} >
+                <Grid item xs={8}>
                     <Typography variant="h6" align="left">
                         {title}
                     </Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                     <Typography variant="h6" align="right">
-                        <Link color="inherit" onClick={() => {
+                        <Button color="inherit" onClick={() => {
                             history.push(allLink)
                          }}>
                             View All
-                        </Link>
+                        </Button>
                     </Typography>
                 </Grid>
             </Grid>
-
-            <Slider {...sliderConfig} >
-                {
-                    items.map((item, i) => <Item key={i} item={convertIntoFormat(item)} />)
-                }
-            </Slider>
+            <div className="album-slider__slider">
+                <Slider {...sliderConfig} >
+                    {
+                        items.map((item, i) => <Item key={i} item={convertIntoFormat(item)} />)
+                    }
+                </Slider>
+            </div>
         </div>
     )
 }

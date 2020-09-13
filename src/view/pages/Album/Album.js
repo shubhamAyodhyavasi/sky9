@@ -1,20 +1,24 @@
 import Grid from '@material-ui/core/Grid';
 import React, { useEffect, useState } from 'react';
+import {useParams} from 'react-router-dom';
 import { getDaynamicPostData } from '../../../services/services'
 import Layout from '../../element/Layout'
 import './Album.css'
 import AlbumCart from '../../element/AlbumCart'
 import config from '../../../constants/config'
 const IMG_URL= config.IMG_URL
-function Album(catId) {
+function Album() {
     const [albumList, setAlbumList] = useState([])
-    const getData = async () => {
-        const response = await getDaynamicPostData('getAlbumBySubCategoryId', { sub_cat_id: 7 })
+    const {
+        id
+    } = useParams()
+    const getData = async (id) => {
+        const response = await getDaynamicPostData('getAlbumBySubCategoryId', { sub_cat_id: id ? id : 7 })
         setAlbumList((response?.records && response?.records.length && response?.records) || [])
     }
     useEffect(()=> {
-        getData()
-    }, [catId]);
+        getData(id)
+    }, [id]);
     console.log('albumList', { albumList })
     const convertIntoFormat = (itm) => {
         const newdata = {

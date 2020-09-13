@@ -1,4 +1,4 @@
-import { SET_USER, UNSET_USER, SET_CART } from "../type";
+import { SET_USER, UNSET_USER } from "../type";
 // import { getSingleUserApi, setCartApi } from "../services/api";
 
 // export const setUser = (user, cart = null) => dispatch => {
