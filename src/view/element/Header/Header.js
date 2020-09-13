@@ -1,7 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, Link } from '@material-ui/core';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { makeStyles, Link, Button } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -83,7 +82,6 @@ export default function Header() {
 
   return (
     <div >
-      <CssBaseline />
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
@@ -100,16 +98,16 @@ export default function Header() {
           <div className="navigation-menu">
               <ul>
                   <li className="navigation-menu__item" >
-                    <a className="navigation-menu__link" href={"#/"} >Home</a>
+                    <Button className="navigation-menu__link" >Home</Button>
                   </li>
                   <li className="navigation-menu__item" >
-                    <a className="navigation-menu__link" href={"#/"} >Movie</a>
+                    <Button className="navigation-menu__link" >Movie</Button>
                   </li>
                   <li className="navigation-menu__item" >
-                    <a className="navigation-menu__link" href={"#/"} >Show</a>
+                    <Button className="navigation-menu__link" >Web Show</Button>
                   </li>
                   <li className="navigation-menu__item" >
-                    <a className="navigation-menu__link" href={"#/"} >Home</a>
+                    <Button className="navigation-menu__link" >Tv</Button>
                   </li>
               </ul>
           </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import "./AlbumCart.css"
+import "./AlbumCart.scss"
 
 export default function AlbumCart({ albumDetails }) {
     const { title, img, totalView } = albumDetails
