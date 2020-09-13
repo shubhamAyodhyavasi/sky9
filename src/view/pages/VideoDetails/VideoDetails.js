@@ -9,6 +9,7 @@ import "./VideoDetails.css"
 const IMG_URL="http://fantasymedia.in/sky9/uploads/"
    
 
+// eslint-disable-next-line no-unused-vars
 const albumDetails={
   title:"title",
   id:"12",
@@ -34,7 +35,7 @@ function VideoDetails() {
                 controls={true}
                 playing
                 width="100%"
-                playIcon={<img width="10%" src={`${IMG_URL}/play.png`} />}
+                playIcon={<img width="10%" alt="play" src={`${IMG_URL}/play.png`} />}
                 url="https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"
                 light="https://akamaividz2.zee5.com/image/upload/w_1337,h_536,c_scale,f_auto,q_auto/resources/0-6-1298/cover/1170x658withlog_1647246974.jpg"
                 config={{ file: {
