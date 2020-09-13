@@ -1,5 +1,5 @@
 import React, { useEffect , useState} from 'react';
-import {getDaynamicGetData} from '../../../services/services'
+import {getDaynamicPostData} from '../../../services/services'
 import Layout from '../../element/Layout'
 import ReactPlayer from 'react-player/lazy'
 import Slides from '../../element/Sliders/Slides/Slides'
@@ -18,7 +18,7 @@ const albumDetails={
 }
 function VideoDetails() {
     useEffect(() => {
-         const a=getDaynamicGetData('getVideoByalbume',84)
+         const a=getDaynamicPostData('getVideoByalbumeId',{album_id:84})
          console.log(a)
       });
       const items = new Array(10).fill(
