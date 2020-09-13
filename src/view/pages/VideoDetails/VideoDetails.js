@@ -21,6 +21,12 @@ function VideoDetails() {
          const a=getDaynamicGetData('getVideoByalbume',84)
          console.log(a)
       });
+      const items = new Array(10).fill(
+        {
+            img: 'https://akamaividz2.zee5.com/image/upload/w_1337,h_536,c_scale,f_auto,q_auto/resources/0-0-214663/cover/1170x658withlogo_756173185.jpg',
+            title: 'Camera',
+            width: '30%',
+        })
   return (
        <Layout >
          <div className="video-player-wrapper">
@@ -65,8 +71,7 @@ function VideoDetails() {
             </div>
             <div className="video-details-more-video">
                <h2>Trailers & More</h2>
-               <Slides />
-               
+               <Slides items={items} allLink="/album" title="Title for slides" />
             </div>
          </div>
          
