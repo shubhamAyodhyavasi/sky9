@@ -1,13 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Link } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import './Header.css'
+import config from '../../../constants/config';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -92,15 +92,25 @@ export default function Header() {
       >
         <Toolbar>
           <div className="navigation-wrapper">
-          <Typography variant="h6" noWrap>
-            Logo
-          </Typography>
+            <Link color="inherit" className="logo-link" >
+              <Typography variant="h6" noWrap>
+                {config.appName}
+              </Typography>
+            </Link>
           <div className="navigation-menu">
               <ul>
-                  <li><a href={"#/"} >Home</a></li>
-                  <li><a href={"#/"} >Movie</a></li>
-                  <li><a href={"#/"} >Show</a></li>
-                  <li><a href={"#/"} >Home</a></li>
+                  <li className="navigation-menu__item" >
+                    <a className="navigation-menu__link" href={"#/"} >Home</a>
+                  </li>
+                  <li className="navigation-menu__item" >
+                    <a className="navigation-menu__link" href={"#/"} >Movie</a>
+                  </li>
+                  <li className="navigation-menu__item" >
+                    <a className="navigation-menu__link" href={"#/"} >Show</a>
+                  </li>
+                  <li className="navigation-menu__item" >
+                    <a className="navigation-menu__link" href={"#/"} >Home</a>
+                  </li>
               </ul>
           </div>
           <div className="navigation-menu-user">

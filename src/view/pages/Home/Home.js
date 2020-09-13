@@ -1,9 +1,7 @@
 import React from 'react';
 import Layout from '../../element/Layout'
 import Slides from '../../element/Sliders/Slides/Slides'
-import AlbumCart from '../../element/AlbumCart'
 import {BannerSlider} from '../../element/Sliders'
-
 
 const bannerItem = [
   {
@@ -22,11 +20,20 @@ const bannerItem = [
     img: 'https://via.placeholder.com/400x500'
   },
 ]
+
+const items = new Array(10).fill(
+  {
+      img: 'https://akamaividz2.zee5.com/image/upload/w_1337,h_536,c_scale,f_auto,q_auto/resources/0-0-214663/cover/1170x658withlogo_756173185.jpg',
+      title: 'Camera',
+      width: '30%',
+  })
 function Home() {
   return (
        <Layout >
            <BannerSlider items={bannerItem} />
-           <Slides title="title for slides" />
+           <Slides items={items} allLink="/album" title="Title for slides" />
+           <Slides items={items} allLink="/album" itle="Title another" />
+           <Slides items={items} allLink="/album" title="Title for slides" />
        </Layout>
   );
 }

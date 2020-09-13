@@ -1,4 +1,4 @@
-const dark = '10161d';
+const dark = '#10161d';
 
 export default {
     dark

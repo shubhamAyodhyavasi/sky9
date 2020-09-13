@@ -1,3 +1,22 @@
-body {
-    background: $dark;
+.banner-slider {
+    position: relative;
+}
+.slick-next:before,
+.slick-prev:before{
+    font-size: 35px;
+}
+button.slick-arrow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 9;
+    width: 35px;
+}
+.slick-prev {
+    left: 15px;
+}
+
+.slick-next {
+    right: 15px;
 }
