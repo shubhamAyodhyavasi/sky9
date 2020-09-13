@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '../../element/Layout'
 import Slides from '../../element/Sliders/Slides/Slides'
 import {BannerSlider} from '../../element/Sliders'
+
 const bannerItem = [
   {
     title: 'Games of thrones',
@@ -29,7 +30,6 @@ const items = new Array(10).fill(
 function Home() {
   return (
        <Layout >
-           {/* <TopSlider /> */}
            <BannerSlider items={bannerItem} />
            <Slides items={items} allLink="/album" title="Title for slides" />
            <Slides items={items} allLink="/album" itle="Title another" />
