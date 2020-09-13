@@ -2,13 +2,13 @@ import Grid from '@material-ui/core/Grid';
 import React, { useEffect, useState } from 'react';
 import { getDaynamicPostData } from '../../../services/services'
 import Layout from '../../element/Layout'
-import './Album.css'
+import './CategoryVideo.css'
 import AlbumCart from '../../element/AlbumCart'
 const IMG_URL="http://fantasymedia.in/sky9/"
-function Album(catId) {
+function CategoryVideo(catId) {
     const [albumList, setAlbumList] = useState([])
     useEffect(async () => {
-        const response = await getDaynamicPostData('getAlbumBySubCategoryId', { sub_cat_id: 7 })
+        const response = await getDaynamicPostData('getAlbumByCategoryId', { cat_id: 2 })
         setAlbumList(response?.records && response?.records.length && response?.records)
     }, [catId]);
     console.log('albumList', { albumList })
@@ -47,4 +47,4 @@ function Album(catId) {
         </Layout>
     );
 }
-export default Album
+export default CategoryVideo
