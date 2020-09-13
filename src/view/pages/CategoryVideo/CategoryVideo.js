@@ -4,7 +4,8 @@ import { getDaynamicPostData } from '../../../services/services'
 import Layout from '../../element/Layout'
 import './CategoryVideo.css'
 import AlbumCart from '../../element/AlbumCart'
-const IMG_URL="http://fantasymedia.in/sky9/"
+import config from '../../../constants/config'
+const IMG_URL= config.IMG_URL
 function CategoryVideo(catId) {
     const [albumList, setAlbumList] = useState([])
     useEffect(async () => {

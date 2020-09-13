@@ -5,7 +5,8 @@ import {
     useHistory
 } from 'react-router-dom'
 import AlbumCart from '../../AlbumCart'
-const IMG_URL="http://fantasymedia.in/sky9/"
+import config from '../../../../constants/config'
+const IMG_URL= config.IMG_URL
 
 export default function Slides({ title, items, allLink }) {
      const history = useHistory()

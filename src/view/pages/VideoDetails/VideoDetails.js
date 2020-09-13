@@ -4,7 +4,8 @@ import Layout from '../../element/Layout'
 import ReactPlayer from 'react-player/lazy'
 
 import "./VideoDetails.css"
-const IMG_URL="http://fantasymedia.in/sky9/"
+import config from '../../../constants/config'
+const IMG_URL= config.IMG_URL
  
 function VideoDetails({album_id}) {
      const [albumData ,setAlbumData]=useState([])

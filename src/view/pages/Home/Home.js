@@ -3,8 +3,8 @@ import { getDaynamicPostData } from '../../../services/services'
 import Layout from '../../element/Layout'
 import Slides from '../../element/Sliders/Slides/Slides'
 import {BannerSlider} from '../../element/Sliders'
-const IMG_URL="http://fantasymedia.in/sky9/"
-
+import config from '../../../constants/config'
+const IMG_URL= config.IMG_URL
 function Home() {
    const [homePageData , setHomePageData] = useState({})
     useEffect(async () => {
