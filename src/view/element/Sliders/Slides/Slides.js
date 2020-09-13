@@ -15,9 +15,23 @@ export default function Slides({ title, items, allLink }) {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToShow: 6,
+        slidesToScroll: 6,
         responsive: [
+            {
+                breakpoint: 1400,
+                settings: {
+                    slidesToShow: 5,
+                    slidesToScroll: 5,
+                }
+            },
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 4,
+                }
+            },
             {
                 breakpoint: 1000,
                 settings: {
@@ -30,13 +44,23 @@ export default function Slides({ title, items, allLink }) {
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
+                    arrows: false
                 }
             },
             {
-                breakpoint: 500,
+                breakpoint: 600,
                 settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    arrows: false
+                }
+            },
+            {
+                breakpoint: 450,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    arrows: false
                 }
             },
         ]
@@ -73,9 +97,7 @@ export default function Slides({ title, items, allLink }) {
 
 function Item({ item }) {
     return (
-        <div style={{
-            padding: '0 15px'
-        }} >
+        <div className="album-slider__item" >
             <AlbumCart albumDetails={item} />
         </div>
     )

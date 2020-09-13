@@ -1,9 +1,27 @@
 .banner-card{
-    height: 450px;
     background-size: cover;
     background-position: center;
     border-radius: 5px;
     display: flex;
     align-items: flex-end;
     justify-content: center;
+    height: auto;
+    position: relative;
+    
+    &:before {
+        content: "";
+        padding-top: 30%;
+        @media (max-width: 500px){
+            padding-top: 45%;
+        }
+    }
+    &__item{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        text-align: center;
+        padding: 5px;
+    }
 }

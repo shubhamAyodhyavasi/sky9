@@ -1,4 +1,10 @@
 
 .album-slider{
     margin-bottom: 40px;
+    &__item{
+        padding: 0 15px;
+        @media screen and (max-width: 500px) {
+            padding: 0 5px;
+        }
+    }
 }
