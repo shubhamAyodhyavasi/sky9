@@ -8,7 +8,7 @@ const IMG_URL="http://fantasymedia.in/sky9/"
 function CategoryVideo(catId) {
     const [albumList, setAlbumList] = useState([])
     useEffect(async () => {
-        const response = await getDaynamicPostData('getAlbumByCategoryId', { cat_id: 2 })
+        const response = await getDaynamicPostData('getAlbumByCategoryId', { cat_id: 4 })
         setAlbumList(response?.records && response?.records.length && response?.records)
     }, [catId]);
     console.log('albumList', { albumList })

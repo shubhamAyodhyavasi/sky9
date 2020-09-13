@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getDaynamicPostData } from '../../../services/services'
 import Layout from '../../element/Layout'
 import Slides from '../../element/Sliders/Slides/Slides'
 import {BannerSlider} from '../../element/Sliders'
@@ -28,12 +29,23 @@ const items = new Array(10).fill(
       width: '30%',
   })
 function Home() {
+   const [homePageData , setHomePageData] = useState({})
+    useEffect(async () => {
+        const response = await getDaynamicPostData('getHomePageData', { cat_id: 4 })
+        setHomePageData(response)
+    }, []);
+    
   return (
        <Layout >
-           <BannerSlider items={bannerItem} />
+         {
+           homePageData && <>
+           <BannerSlider items={homePageData?.bannerRecord} />
            <Slides items={items} allLink="/album" title="Title for slides" />
            <Slides items={items} allLink="/album" itle="Title another" />
            <Slides items={items} allLink="/album" title="Title for slides" />
+           </>
+         }
+           
        </Layout>
   );
 }
