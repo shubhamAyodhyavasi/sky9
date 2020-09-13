@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useEffect , useState} from 'react';
+import {getDaynamicGetData} from '../../../services/services'
 import Layout from '../../element/Layout'
 import ReactPlayer from 'react-player/lazy'
 import Slides from '../../element/Sliders/Slides/Slides'
+
 import "./VideoDetails.css"
+//import {IMG_URL} from '../../../constants'
+const IMG_URL="http://fantasymedia.in/sky9/uploads/"
+   
+
 const albumDetails={
   title:"title",
   id:"12",
@@ -11,6 +17,10 @@ const albumDetails={
   img:"https://akamaividz2.zee5.com/image/upload/w_1337,h_536,c_scale,f_auto,q_auto/resources/0-0-214663/cover/1170x658withlogo_756173185.jpg"
 }
 function VideoDetails() {
+    useEffect(() => {
+         const a=getDaynamicGetData('getVideoByalbume',84)
+         console.log(a)
+      });
   return (
        <Layout >
          <div className="video-player-wrapper">
@@ -18,7 +28,7 @@ function VideoDetails() {
                 controls={true}
                 playing
                 width="100%"
-                playIcon={<img width="10%" src="http://fantasymedia.in/sky9/uploads/play.png" />}
+                playIcon={<img width="10%" src={`${IMG_URL}/play.png`} />}
                 url="https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"
                 light="https://akamaividz2.zee5.com/image/upload/w_1337,h_536,c_scale,f_auto,q_auto/resources/0-6-1298/cover/1170x658withlog_1647246974.jpg"
                 config={{ file: {
