@@ -5,12 +5,11 @@ import {
     useHistory
 } from 'react-router-dom'
 import AlbumCart from '../../AlbumCart'
-
+import config from '../../../../constants/config'
+const IMG_URL= config.IMG_URL
 
 export default function Slides({ title, items, allLink }) {
-    // const itemWidth = 300;
-    // const itemToShow = Math.floor((window.innerWidth - 50) / itemWidth)
-    const history = useHistory()
+     const history = useHistory()
     const sliderConfig = {
         dots: true,
         infinite: true,
@@ -66,6 +65,15 @@ export default function Slides({ title, items, allLink }) {
         ]
     }
 
+    const convertIntoFormat = (itm) => {
+        const newdata = {
+            title: itm.details,
+            id: itm.album_id,
+            img: `${IMG_URL}/${itm?.image}`,
+        }
+        return newdata
+    }
+
 
     return (
         <div className="album-slider">
@@ -88,7 +96,7 @@ export default function Slides({ title, items, allLink }) {
 
             <Slider {...sliderConfig} >
                 {
-                    items.map((item, i) => <Item key={i} item={item} />)
+                    items.map((item, i) => <Item key={i} item={convertIntoFormat(item)} />)
                 }
             </Slider>
         </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, Link, Button } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import config from '../../../constants/config';
 import {useHistory} from 'react-router-dom';
+import { getDaynamicPostData } from '../../../services/services'
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -68,6 +69,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Header() {
+  const [menuData, setMenuData] = useState([])
+  const getData = async () => {
+    const response = await getDaynamicPostData('getCategory', { cat_id: 4 })
+    setMenuData(response?.records)
+  }
+  useEffect(()=> {
+    getData()
+  }, []);
   const classes = useStyles();
   const history = useHistory()
   const [open, setOpen] = React.useState(false);
@@ -101,39 +110,35 @@ export default function Header() {
                 {config.appName}
               </Typography>
             </Link>
-          <div className="navigation-menu">
+            <div className="navigation-menu">
               <ul>
-                  <li className="navigation-menu__item" >
-                    <Button className="navigation-menu__link" >Home</Button>
-                  </li>
-                  <li className="navigation-menu__item" >
-                    <Button className="navigation-menu__link" >Movie</Button>
-                  </li>
-                  <li className="navigation-menu__item" >
-                    <Button className="navigation-menu__link" >Web Show</Button>
-                  </li>
-                  <li className="navigation-menu__item" >
-                    <Button className="navigation-menu__link" >Tv</Button>
-                  </li>
+                {
+                  menuData && menuData.map((itm, index) =>
+                    <li className="navigation-menu__item" >
+                      <Button className="navigation-menu__link" >{itm?.title}</Button>
+                    </li>
+                  )
+                }
+              
               </ul>
-          </div>
-          <div className="navigation-menu-user">
-          <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls="primary-search-account-menu"
-              aria-haspopup="true"
-             // onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
+            </div>
+            <div className="navigation-menu-user">
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls="primary-search-account-menu"
+                aria-haspopup="true"
+                // onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            </div>
           </div>
         </Toolbar>
       </AppBar>
-      
-      
+
+
     </div>
   );
 }

@@ -3,49 +3,36 @@ import { getDaynamicPostData } from '../../../services/services'
 import Layout from '../../element/Layout'
 import Slides from '../../element/Sliders/Slides/Slides'
 import { BannerSlider } from '../../element/Sliders'
-
-// const bannerItem = [
-//   {
-//     title: 'Games of thrones',
-//     description: 'safd askdfjksdjaf sad fjsfj lks ',
-//     img: 'https://www.hjackets.com/blog/wp-content/uploads/2017/11/game-of-thrones-s-4-banner.jpg'
-//   },
-//   {
-//     title: 'test',
-//     description: 'safd askdfjksdjaf sad fjsfj lks ',
-//     img: 'https://via.placeholder.com/400x500'
-//   },
-//   {
-//     title: 'test',
-//     description: 'safd askdfjksdjaf sad fjsfj lks ',
-//     img: 'https://via.placeholder.com/400x500'
-//   },
-// ]
-
-const items = new Array(10).fill(
-  {
-    img: 'https://akamaividz2.zee5.com/image/upload/w_1337,h_536,c_scale,f_auto,q_auto/resources/0-0-214663/cover/1170x658withlogo_756173185.jpg',
-    title: 'Camera',
-    width: '30%',
-  })
+import config from '../../../constants/config'
+const IMG_URL = config.IMG_URL
 function Home() {
   const [homePageData, setHomePageData] = useState({})
   const getData = async () => {
-    const response = await getDaynamicPostData('getHomePageData', { cat_id: 4 })
+    const response = await getDaynamicPostData('getHomePageDataById', { cat_id: 4 })
     setHomePageData(response)
   }
   useEffect(() => {
     getData()
   }, []);
-
+  const convertIntoFormat = (itm) => {
+    const newdata = {
+      title: itm.details,
+      id: itm.album_id,
+      img: `${IMG_URL}/${itm?.image}`,
+    }
+    return newdata
+  }
   return (
     <Layout >
       {
         homePageData && <>
           <BannerSlider items={homePageData?.bannerRecord} />
-          <Slides items={items} allLink="/album" title="Title for slides" />
-          <Slides items={items} allLink="/album" itle="Title another" />
-          <Slides items={items} allLink="/album" title="Title for slides" />
+          {
+            homePageData?.records?.map((itm, index) =>
+              <Slides key={index} items={itm?.album} allLink="/album" title={itm.cat.title} />
+            )
+          }
+
         </>
       }
 

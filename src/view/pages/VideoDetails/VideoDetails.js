@@ -4,26 +4,27 @@ import Layout from '../../element/Layout'
 import ReactPlayer from 'react-player/lazy'
 
 import "./VideoDetails.css"
-const IMG_URL = "http://fantasymedia.in/sky9/"
+import config from '../../../constants/config'
+const IMG_URL = config.IMG_URL
 
 function VideoDetails({ album_id }) {
     const [albumData, setAlbumData] = useState([])
     const [videoData, setVideoData] = useState([])
     const getData = async () => {
         const response = await getDaynamicPostData('getVideoByalbumeId', { album_id: 82 })
-        setAlbumData((response?.records && response?.records.length && response?.records) || [])
-        setVideoData((response?.records && response?.records.length && response?.records[0]) || [])
+        setAlbumData(response?.records && response?.records.length && response?.records)
+        setVideoData(response?.records && response?.records.length && response?.records[0])
     }
-    useEffect(() => {
+    useEffect(() => [
         getData()
-    }, [album_id]);
+    ], [album_id]);
 
 
 
     return (
         <Layout >
             {
-                albumData.length > 0 &&
+                albumData.length &&
                 <>
                     <div className="video-player-wrapper">
                         <ReactPlayer
