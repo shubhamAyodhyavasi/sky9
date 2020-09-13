@@ -1,0 +1,25 @@
+
+.navigation-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+.navigation-menu{
+    ul{
+        list-style-type: none;
+    }
+    &__item{
+        display: inline;
+        padding:6px
+    }
+    &__link{
+        color: #ffffff;
+        text-decoration: none;
+    }
+}
+.logo-link{
+    &:hover{
+        text-decoration: none;
+    }
+}
