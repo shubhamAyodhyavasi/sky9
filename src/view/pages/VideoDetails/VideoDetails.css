@@ -11,3 +11,11 @@
 .video-details-info-single{
     margin-right: 30px;
 }
+.video-details-more-video-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+.video-details-more-video-cart {
+    margin-right: 10px;
+    cursor: pointer;
+}
