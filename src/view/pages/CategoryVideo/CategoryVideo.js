@@ -7,9 +7,12 @@ import AlbumCart from '../../element/AlbumCart'
 const IMG_URL="http://fantasymedia.in/sky9/"
 function CategoryVideo(catId) {
     const [albumList, setAlbumList] = useState([])
-    useEffect(async () => {
+    const getData = async () => {
         const response = await getDaynamicPostData('getAlbumByCategoryId', { cat_id: 4 })
         setAlbumList(response?.records && response?.records.length && response?.records)
+    }
+    useEffect(()=> {
+        getData();
     }, [catId]);
     console.log('albumList', { albumList })
     const convertIntoFormat = (itm) => {

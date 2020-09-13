@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import config from '../../../constants/config';
+import {useHistory} from 'react-router-dom';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -68,6 +69,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
+  const history = useHistory()
   const [open, setOpen] = React.useState(false);
 
   // eslint-disable-next-line no-unused-vars
@@ -79,7 +81,9 @@ export default function Header() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
+  // const goToHome = () => {
+  //   history.push("/")
+  // }
   return (
     <div >
       <AppBar
@@ -90,7 +94,9 @@ export default function Header() {
       >
         <Toolbar>
           <div className="navigation-wrapper">
-            <Link color="inherit" className="logo-link" >
+            <Link onClick={()=> {
+              history.push("/")
+            }} color="inherit" className="logo-link" >
               <Typography variant="h6" noWrap>
                 {config.appName}
               </Typography>
