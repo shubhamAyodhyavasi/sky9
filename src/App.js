@@ -4,6 +4,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from 'react-redux'
 import Home from './view/pages/Home'
 import Album from './view/pages/Album'
+import VideoDetails from './view/pages/VideoDetails'
 import './App.scss';
 
 function App() {
@@ -19,6 +20,11 @@ function App() {
             path="/album"
             component={_props => <Album/>}
           />
+          <Route
+            path="/video"
+            component={_props => <VideoDetails/>}
+          />
+
       </Switch>
     </div>
   );

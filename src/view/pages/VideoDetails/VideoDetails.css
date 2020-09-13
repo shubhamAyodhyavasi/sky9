@@ -1,0 +1,13 @@
+.video-details-wrapper {
+    margin-top: 30px;
+}
+.video-details-title {
+    border-bottom: 4px solid #808080e0;
+}
+.video-details-info {
+    margin-top: 30px;
+    display: flex;
+}
+.video-details-info-single{
+    margin-right: 30px;
+}
