@@ -4,11 +4,11 @@ import colors from './colors'
 const baseTheme = {
     palette: {
         type: 'dark',
-        // primary: {
-        //   main: '#00AAE1',
-        //   dark: '#143C8C',
-        //   contrastText: '#fff',
-        // },
+        primary: {
+          main: '#250b64',
+          dark: '#011123',
+          contrastText: '#fff',
+        },
         // secondary: {
         //   main: '#64B42D',
         //   dark: '#008732',

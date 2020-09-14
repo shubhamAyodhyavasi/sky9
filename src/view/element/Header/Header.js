@@ -1,15 +1,14 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, Link, Button} from '@material-ui/core';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Typography from '@material-ui/core/Typography';
+import {
+  makeStyles, Link, Button, Drawer, Toolbar, AppBar,
+  List, ListItem, ListItemText, Divider
+} from '@material-ui/core';
+import { Menu } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import config from '../../../constants/config';
-import {useHistory} from 'react-router-dom';
-import { connect } from 'react-redux';
 import logo from '../../../assets/images/sky-logo.png'
 const drawerWidth = 240;
 
@@ -25,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
+    marginRight: drawerWidth,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
@@ -59,20 +58,26 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: -drawerWidth,
+    marginRight: -drawerWidth,
   },
   contentShift: {
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    marginLeft: 0,
+    marginRight: 0,
+  },
+  desktopNav: {
+
+  },
+  mobileNav: {
+
   }
 }));
 
 
 
-function Header({menus}) {
+function Header({ menus }) {
   const classes = useStyles();
   const history = useHistory()
   const [open, setOpen] = React.useState(false);
@@ -96,32 +101,28 @@ function Header({menus}) {
       >
         <Toolbar>
           <div className="navigation-wrapper">
-            <Link onClick={()=> {
+            <Link onClick={() => {
               history.push("/")
             }} color="inherit" className="logo-link" >
-              <img src={logo} alt={config.appName} />
-              {/* <Typography variant="h6" noWrap>
-                {config.appName}
-              </Typography> */}
+              <img width="90px" src={logo} alt={config.appName} />
             </Link>
             <div className="navigation-menu">
               <ul>
                 {
                   menus.map((itm, index) =>
                     <li className="navigation-menu__item" key={index} >
-                      <Button onClick={()=> {
+                      <Button onClick={() => {
                         itm.cat_id && history.push(`/category/${itm.cat_id}`)
                       }} className="navigation-menu__link" >{itm?.title}</Button>
                     </li>
                   )
                 }
-              
               </ul>
             </div>
             <div className="navigation-menu-user">
               {
-                isLogin ? <> 
-                {/* <IconButton
+                isLogin ? <>
+                  {/* <IconButton
                 edge="end"
                 aria-label="account of current user"
                 aria-controls="primary-search-account-menu"
@@ -131,12 +132,47 @@ function Header({menus}) {
               >
               <AccountCircle />
               </IconButton> */}
-              <Button onClick={()=> {localStorage.removeItem("userDetails"); history.push(`/`)}}  className="navigation-menu__link" >Logout</Button>
-              </>:
-              <Button onClick={()=> { history.push(`/login`)}}  className="navigation-menu__link" >Login</Button>
+                  <Button onClick={() => { localStorage.removeItem("userDetails"); history.push(`/`) }} className="navigation-menu__link" >Logout</Button>
+                </> :
+                  <Button onClick={() => { history.push(`/login`) }} className="navigation-menu__link" >Login</Button>
               }
-              
-              
+            </div>
+            <div className="mobile-nav">
+              <Button onClick={handleDrawerOpen}><Menu /></Button>
+              <Drawer classes={{
+                paper: classes.drawerPaper,
+              }}
+                anchor={"right"} open={open} onClose={handleDrawerClose}>
+                <List style={{
+                  width: "100%"
+                }} >
+                  {menus.map(({ title, cat_id }) => (
+                    <ListItem key={title} button onClick={() => {
+                      cat_id && history.push(`/category/${cat_id}`)
+                    }} >
+                      {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+                      <ListItemText primary={title} />
+                    </ListItem>
+                  ))}
+                  <Divider />
+                  {
+                    isLogin ? <> 
+                      <ListItem button onClick={() => {
+                        history.push(`/`)
+                      }} >
+                        {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+                        <ListItemText primary={"Logout"} />
+                      </ListItem>
+                    </> :
+                    <ListItem button onClick={() => {
+                      history.push(`/login`)
+                    }} >
+                      {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+                      <ListItemText primary={"Login"} />
+                    </ListItem>
+                  }
+                </List>
+              </Drawer>
             </div>
           </div>
         </Toolbar>
