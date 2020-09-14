@@ -5,6 +5,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Typography from '@material-ui/core/Typography';
+
 import config from '../../../constants/config';
 import {useHistory} from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -69,17 +71,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const options = [
-  'Show some love to Material-UI',
-  'Show all notification content',
-  'Hide sensitive notification content',
-  'Hide all notification content',
-];
+
 function Header({menus}) {
   const classes = useStyles();
   const history = useHistory()
   const [open, setOpen] = React.useState(false);
-
   // eslint-disable-next-line no-unused-vars
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -124,7 +120,8 @@ function Header({menus}) {
             </div>
             <div className="navigation-menu-user">
               {
-                isLogin ? <IconButton
+                isLogin ? <> 
+                {/* <IconButton
                 edge="end"
                 aria-label="account of current user"
                 aria-controls="primary-search-account-menu"
@@ -133,7 +130,9 @@ function Header({menus}) {
                 color="inherit"
               >
               <AccountCircle />
-              </IconButton>:
+              </IconButton> */}
+              <Button onClick={()=> {localStorage.removeItem("userDetails"); history.push(`/`)}}  className="navigation-menu__link" >Logout</Button>
+              </>:
               <Button onClick={()=> { history.push(`/login`)}}  className="navigation-menu__link" >Login</Button>
               }
               

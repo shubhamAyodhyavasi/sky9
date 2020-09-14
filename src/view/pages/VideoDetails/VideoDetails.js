@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {useParams} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { getDaynamicPostData } from '../../../services/services'
 import Layout from '../../element/Layout'
 import ReactPlayer from 'react-player/lazy'
-
+import Skeleton from '@material-ui/lab/Skeleton';
 import "./VideoDetails.css"
 import config from '../../../constants/config'
 const IMG_URL = config.IMG_URL
@@ -11,32 +11,44 @@ const IMG_URL = config.IMG_URL
 function VideoDetails() {
     const [albumData, setAlbumData] = useState([])
     const [videoData, setVideoData] = useState([])
-    const {id} = useParams()
+    const [skeletonView, setSkeletonView] = useState(true)
+    const { id } = useParams()
     useEffect(() => {
         getData(id)
     }, [id]);
 
     const getData = async (id) => {
-        if(!id) return
+        if (!id) return
         const response = await getDaynamicPostData('getVideoByalbumeId', { album_id: id })
         setAlbumData(response?.records && response?.records.length && response?.records)
         setVideoData(response?.records && response?.records.length && response?.records[0])
+        setSkeletonView(false)
     }
 
     return (
         <Layout >
+            {skeletonView &&
+            <>
+                <Skeleton variant="rect" width="100%" height="85vh" />
+                <Skeleton variant="text" width="25%" style={{ marginTop: 20 }} />
+                <Skeleton variant="text" width="25%" style={{ marginTop: 20 }} />
+                </>
+            }
             {
                 albumData.length > 0 &&
                 <>
+
+
                     <div className="video-player-wrapper">
                         <ReactPlayer
                             controls={true}
                             playing
                             width="100%"
+                            height="85vh"
                             playIcon={<img width="10%" alt="play" src={`${IMG_URL}/uploads/play.png`} />}
 
-                            url={`${IMG_URL}/${videoData?.video_link}`}
-                            //url="https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"
+                            url={videoData?.video_link ? `${IMG_URL}/${videoData?.video_link}` : "https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"}
+                            // url="https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"
                             light={`${IMG_URL}/${videoData?.image}`}
                             config={{
                                 file: {
@@ -46,10 +58,10 @@ function VideoDetails() {
                                     },
 
                                     nodownload: true,
-                                    // tracks: [
-                                    // {kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'en', default: true},
-                                    // {kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'hi'}
-                                    // ]
+                                    tracks: [
+                                        { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'en', default: true },
+                                        { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'hi' }
+                                    ]
                                 }
                             }}
                         />
@@ -62,11 +74,11 @@ function VideoDetails() {
                         <div className="video-details-info">
                             <div className="video-details-info-single">
                                 <h4>Released On</h4>
-                                <p>{videoData?.release_date }</p>
+                                <p>{videoData?.release_date}</p>
                             </div>
                             <div className="video-details-info-single">
                                 <h4>Language</h4>
-                        <p>{videoData?.langauge}</p>
+                                <p>{videoData?.langauge}</p>
                             </div>
                         </div>
                         <div className="video-details-subDetails">
@@ -79,7 +91,7 @@ function VideoDetails() {
                                     albumData?.map((data, index) =>
                                         <div key={index} className="video-details-more-video-cart">
                                             <span onClick={() => { setVideoData(data) }}>
-                                                <img  alt="" src={`${IMG_URL}/${data?.image}`} />
+                                                <img alt="" src={`${IMG_URL}/${data?.image}`} />
                                                 <h3>{data?.title}</h3>
                                             </span>
                                         </div>
