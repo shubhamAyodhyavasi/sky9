@@ -33,10 +33,11 @@ function VideoDetails() {
                             controls={true}
                             playing
                             width="100%"
+                            height="85vh"
                             playIcon={<img width="10%" alt="play" src={`${IMG_URL}/uploads/play.png`} />}
 
-                            url={`${IMG_URL}/${videoData?.video_link}`}
-                            //url="https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"
+                            url={videoData?.video_link ? `${IMG_URL}/${videoData?.video_link}`:"https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"}
+                           // url="https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"
                             light={`${IMG_URL}/${videoData?.image}`}
                             config={{
                                 file: {
@@ -46,10 +47,10 @@ function VideoDetails() {
                                     },
 
                                     nodownload: true,
-                                    // tracks: [
-                                    // {kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'en', default: true},
-                                    // {kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'hi'}
-                                    // ]
+                                    tracks: [
+                                    {kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'en', default: true},
+                                    {kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'hi'}
+                                    ]
                                 }
                             }}
                         />
