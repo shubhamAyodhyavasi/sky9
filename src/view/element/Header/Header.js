@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, Link, Button } from '@material-ui/core';
+import { makeStyles, Link, Button} from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -68,6 +68,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
+const options = [
+  'Show some love to Material-UI',
+  'Show all notification content',
+  'Hide sensitive notification content',
+  'Hide all notification content',
+];
 function Header({menus}) {
   const classes = useStyles();
   const history = useHistory()
