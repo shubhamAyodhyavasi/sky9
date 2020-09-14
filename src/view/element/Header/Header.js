@@ -82,6 +82,7 @@ function Header({menus}) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const isLogin = localStorage.getItem("userDetails");
   return (
     <div >
       <AppBar
@@ -114,7 +115,8 @@ function Header({menus}) {
               </ul>
             </div>
             <div className="navigation-menu-user">
-              <IconButton
+              {
+                isLogin ? <IconButton
                 edge="end"
                 aria-label="account of current user"
                 aria-controls="primary-search-account-menu"
@@ -122,8 +124,12 @@ function Header({menus}) {
                 // onClick={handleProfileMenuOpen}
                 color="inherit"
               >
-                <AccountCircle />
-              </IconButton>
+              <AccountCircle />
+              </IconButton>:
+              <Button onClick={()=> { history.push(`/login`)}}  className="navigation-menu__link" >Login</Button>
+              }
+              
+              
             </div>
           </div>
         </Toolbar>

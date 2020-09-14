@@ -7,8 +7,6 @@ import { BannerSlider } from '../../element/Sliders'
 
 import { config } from '../../../constants';
 
-// import config from '../../../constants/config'
-// const IMG_URL = config.IMG_URL
 function Home() {
   const [homePageData, setHomePageData] = useState({})
   const {

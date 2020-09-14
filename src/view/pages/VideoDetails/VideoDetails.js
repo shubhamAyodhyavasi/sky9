@@ -62,11 +62,11 @@ function VideoDetails() {
                         <div className="video-details-info">
                             <div className="video-details-info-single">
                                 <h4>Released On</h4>
-                                <p>4 April 2020</p>
+                                <p>{videoData?.release_date }</p>
                             </div>
                             <div className="video-details-info-single">
                                 <h4>Language</h4>
-                                <p>Hindi</p>
+                        <p>{videoData?.langauge}</p>
                             </div>
                         </div>
                         <div className="video-details-subDetails">
@@ -79,7 +79,7 @@ function VideoDetails() {
                                     albumData?.map((data, index) =>
                                         <div key={index} className="video-details-more-video-cart">
                                             <span onClick={() => { setVideoData(data) }}>
-                                                <img alt="" src={`${IMG_URL}/${data?.image}`} />
+                                                <img  alt="" src={`${IMG_URL}/${data?.image}`} />
                                                 <h3>{data?.title}</h3>
                                             </span>
                                         </div>

@@ -6,6 +6,7 @@ import Home from './view/pages/Home'
 import Album from './view/pages/Album'
 import VideoDetails from './view/pages/VideoDetails'
 import CategoryVideo from './view/pages/CategoryVideo'
+import Login from './view/pages/Login'
 import './App.scss';
 import { setMenus } from './services/redux/actions';
 import {getDaynamicPostData} from './services'
@@ -43,6 +44,10 @@ function App({setMenus}) {
           <Route
             path="/video/:id"
             component={_props => <VideoDetails {..._props} />}
+          />
+           <Route
+            path="/login"
+            component={_props => <Login {..._props} />}
           />
       </Switch>
     </div>
