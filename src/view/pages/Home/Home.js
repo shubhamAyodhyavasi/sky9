@@ -4,7 +4,7 @@ import { getDaynamicPostData } from '../../../services/services'
 import Layout from '../../element/Layout'
 import Slides from '../../element/Sliders/Slides/Slides'
 import { BannerSlider } from '../../element/Sliders'
-
+import Skeleton from '@material-ui/lab/Skeleton';
 import { config } from '../../../constants';
 
 function Home() {
@@ -44,6 +44,14 @@ function Home() {
             )
           }
 
+        </>
+      }
+      {
+        !homePageData.records &&  <>
+        <Skeleton variant="rect" width="100%" height="50vh" />
+        <Skeleton variant="rect" width="100%" height="20vh"  style={{ marginTop: 20 }} />
+        <Skeleton variant="rect" width="100%" height="20vh"  style={{ marginTop: 20 }}/>
+        <Skeleton variant="rect" width="100%" height="20vh" style={{ marginTop: 20 }} />
         </>
       }
 
