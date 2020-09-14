@@ -3,12 +3,12 @@ import clsx from 'clsx';
 import { makeStyles, Link, Button} from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import config from '../../../constants/config';
 import {useHistory} from 'react-router-dom';
 import { connect } from 'react-redux';
+import logo from '../../../assets/images/sky-logo.png'
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -103,9 +103,10 @@ function Header({menus}) {
             <Link onClick={()=> {
               history.push("/")
             }} color="inherit" className="logo-link" >
-              <Typography variant="h6" noWrap>
+              <img src={logo} alt={config.appName} />
+              {/* <Typography variant="h6" noWrap>
                 {config.appName}
-              </Typography>
+              </Typography> */}
             </Link>
             <div className="navigation-menu">
               <ul>
