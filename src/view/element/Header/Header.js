@@ -69,12 +69,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const options = [
-  'Show some love to Material-UI',
-  'Show all notification content',
-  'Hide sensitive notification content',
-  'Hide all notification content',
-];
+
 function Header({menus}) {
   const classes = useStyles();
   const history = useHistory()
@@ -123,7 +118,8 @@ function Header({menus}) {
             </div>
             <div className="navigation-menu-user">
               {
-                isLogin ? <IconButton
+                isLogin ? <> 
+                {/* <IconButton
                 edge="end"
                 aria-label="account of current user"
                 aria-controls="primary-search-account-menu"
@@ -132,7 +128,9 @@ function Header({menus}) {
                 color="inherit"
               >
               <AccountCircle />
-              </IconButton>:
+              </IconButton> */}
+              <Button onClick={()=> {localStorage.removeItem("userDetails"); history.push(`/`)}}  className="navigation-menu__link" >Logout</Button>
+              </>:
               <Button onClick={()=> { history.push(`/login`)}}  className="navigation-menu__link" >Login</Button>
               }
               
