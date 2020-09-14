@@ -49,9 +49,10 @@ function Home() {
       {
         !homePageData.records &&  <>
         <Skeleton variant="rect" width="100%" height="50vh" />
-        <Skeleton variant="rect" width="100%" height="20vh"  style={{ marginTop: 20 }} />
-        <Skeleton variant="rect" width="100%" height="20vh"  style={{ marginTop: 20 }}/>
-        <Skeleton variant="rect" width="100%" height="20vh" style={{ marginTop: 20 }} />
+        <Skeleton variant="rect" width="25%" height="20px"  style={{ marginTop: 20 }} />
+        <Skeleton variant="rect" width="100%" height="30vh"  style={{ marginTop: 10 }} />
+        <Skeleton variant="rect" width="25%" height="20px"  style={{ marginTop: 20 }} />
+        <Skeleton variant="rect" width="100%" height="30vh"  style={{ marginTop: 10 }} />
         </>
       }
 
