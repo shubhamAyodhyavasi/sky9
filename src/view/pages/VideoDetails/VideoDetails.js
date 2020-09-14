@@ -28,10 +28,11 @@ function VideoDetails() {
     return (
         <Layout >
             {skeletonView &&
-            <>
-                <Skeleton variant="rect" width="100%" height="85vh" />
-                <Skeleton variant="text" width="25%" style={{ marginTop: 20 }} />
-                <Skeleton variant="text" width="25%" style={{ marginTop: 20 }} />
+                <>
+                    <Skeleton variant="rect" width="100%" height="85vh" />
+                    <Skeleton variant="text" width="25%" style={{ marginTop: 20 }} />
+                    <Skeleton variant="text" width="25%" style={{ marginTop: 20 }} />
+                    <Skeleton variant="text" width="100%" style={{ marginTop: 40 }} />
                 </>
             }
             {
@@ -74,12 +75,17 @@ function VideoDetails() {
                         <div className="video-details-info">
                             <div className="video-details-info-single">
                                 <h4>Released On</h4>
-                                <p>{videoData?.release_date}</p>
+                                <p>{videoData?.album_dt?.release_date}</p>
+                            </div>
+                            <div className="video-details-info-single">
+                                <h4>Video Length</h4>
+                                <p>{videoData?.album_dt?.video_duration}</p>
                             </div>
                             <div className="video-details-info-single">
                                 <h4>Language</h4>
-                                <p>{videoData?.langauge}</p>
+                                <p>{videoData?.album_dt?.langauge}</p>
                             </div>
+
                         </div>
                         <div className="video-details-subDetails">
                             <p>{albumData[0].details}</p>
