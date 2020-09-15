@@ -160,9 +160,7 @@ function VideoDetails() {
                     <Alert onClose={handleClose} severity={open.type ? "success" : "error"}>
                         {open.msg}
                     </Alert>
-
-
-                }
+              }
 
             </Snackbar>
         </Layout>

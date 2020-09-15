@@ -8,6 +8,7 @@ import VideoDetails from './view/pages/VideoDetails'
 import CategoryVideo from './view/pages/CategoryVideo'
 import Login from './view/pages/Login'
 import Reg from './view/pages/Reg'
+import SavedVideo from './view/pages/SavedVideo'
 import './App.scss';
 import { setMenus } from './services/redux/actions';
 import {getDaynamicPostData} from './services'
@@ -53,6 +54,10 @@ function App({setMenus}) {
           <Route
             path="/register"
             component={_props => <Reg {..._props} />}
+          />
+          <Route
+            path="/saved-video"
+            component={_props => <SavedVideo {..._props} />}
           />
       </Switch>
     </div>
