@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/sky9/static/css/main.27db6a3d.chunk.css",
-    "main.js": "/sky9/static/js/main.a8f852e8.chunk.js",
-    "main.js.map": "/sky9/static/js/main.a8f852e8.chunk.js.map",
+    "main.js": "/sky9/static/js/main.df0ce6cb.chunk.js",
+    "main.js.map": "/sky9/static/js/main.df0ce6cb.chunk.js.map",
     "reactPlayerDailyMotion.js": "/sky9/static/js/reactPlayerDailyMotion.458dbaa6.chunk.js",
     "reactPlayerDailyMotion.js.map": "/sky9/static/js/reactPlayerDailyMotion.458dbaa6.chunk.js.map",
     "reactPlayerFacebook.js": "/sky9/static/js/reactPlayerFacebook.04b95794.chunk.js",
@@ -32,7 +32,7 @@
     "static/js/14.6d85b245.chunk.js": "/sky9/static/js/14.6d85b245.chunk.js",
     "static/js/14.6d85b245.chunk.js.map": "/sky9/static/js/14.6d85b245.chunk.js.map",
     "index.html": "/sky9/index.html",
-    "precache-manifest.5b03086a98d4fc7dfb24088ff7ffa1ba.js": "/sky9/precache-manifest.5b03086a98d4fc7dfb24088ff7ffa1ba.js",
+    "precache-manifest.671587339e2e263ff60b6a52d0663393.js": "/sky9/precache-manifest.671587339e2e263ff60b6a52d0663393.js",
     "service-worker.js": "/sky9/service-worker.js",
     "static/css/main.27db6a3d.chunk.css.map": "/sky9/static/css/main.27db6a3d.chunk.css.map",
     "static/js/14.6d85b245.chunk.js.LICENSE.txt": "/sky9/static/js/14.6d85b245.chunk.js.LICENSE.txt",
@@ -42,6 +42,6 @@
     "static/js/runtime-main.08b3a3fc.js",
     "static/js/14.6d85b245.chunk.js",
     "static/css/main.27db6a3d.chunk.css",
-    "static/js/main.a8f852e8.chunk.js"
+    "static/js/main.df0ce6cb.chunk.js"
   ]
 }
