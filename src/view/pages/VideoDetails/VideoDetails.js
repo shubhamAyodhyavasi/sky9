@@ -6,7 +6,7 @@ import ReactPlayer from 'react-player/lazy'
 import Skeleton from '@material-ui/lab/Skeleton';
 import "./VideoDetails.css"
 import config from '../../../constants/config'
-import { Button, Snackbar } from '@material-ui/core';
+import { Button, Snackbar ,Grid} from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import { Alert } from '@material-ui/lab';
 const IMG_URL = config.IMG_URL
@@ -129,16 +129,22 @@ function VideoDetails() {
                         <div className="video-details-more-video">
                             <h2>Trailers & More</h2>
                             <div className="video-details-more-video-wrapper">
+                                <Grid container spacing={3}>
+                                
                                 {
                                     albumData?.map((data, index) =>
                                         <div key={index} className="video-details-more-video-cart">
-                                            <span onClick={() => { setVideoData(data) }}>
-                                                <img alt="" src={`${IMG_URL}/${data?.image}`} />
-                                                <h3>{data?.title}</h3>
-                                            </span>
+                                            <Grid key={index} item lg={3} md={4} sm={6} xs={6} >
+                                                <span onClick={() => { setVideoData(data) }}>
+                                                    <img  alt="" src={`${IMG_URL}/${data?.image}`} />
+                                                    <h3>{data?.title}</h3>
+                                                </span>
+                                            </Grid>
+
                                         </div>
                                     )
                                 }
+                                </Grid>
 
                             </div>
 
@@ -155,12 +161,12 @@ function VideoDetails() {
                 open={open.action}
                 autoHideDuration={6000}
                 onClose={handleClose}
-              >
+            >
                 {
                     <Alert onClose={handleClose} severity={open.type ? "success" : "error"}>
                         {open.msg}
                     </Alert>
-              }
+                }
 
             </Snackbar>
         </Layout>
