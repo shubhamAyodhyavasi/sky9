@@ -62,7 +62,7 @@ export default function Login() {
                             />
                         </div>
 
-                        <Button type="submit" variant="outlined" color="primary">
+                        <Button type="submit" variant="outlined" color="default">
                             Login
                         </Button>
                         <div className="login-footer-links">

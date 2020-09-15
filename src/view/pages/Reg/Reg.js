@@ -87,7 +87,7 @@ export default function Reg() {
                             />
                         </div>
 
-                        <Button type="submit" variant="outlined" color="primary">
+                        <Button type="submit" variant="outlined" color="default">
                             Save
                     </Button>
                     <div className="reg-footer-links">

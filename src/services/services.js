@@ -73,4 +73,13 @@ export const placeOrder = async (formData) => {
     });
 };
 
+export const getUserData =  () => {
+  if(localStorage.getItem("userDetails")){
+   const userDetails= localStorage.getItem("userDetails");
+   return JSON.parse(userDetails)
+  }else{
+    return false
+  }
+};
+
 

@@ -3,6 +3,9 @@
 }
 .video-details-title {
     border-bottom: 4px solid #808080e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .video-details-info {
     margin-top: 30px;

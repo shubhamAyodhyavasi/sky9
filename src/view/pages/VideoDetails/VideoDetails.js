@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
-import { getDaynamicPostData } from '../../../services/services'
+import { getDaynamicPostData, getUserData } from '../../../services/services'
 import Layout from '../../element/Layout'
 import ReactPlayer from 'react-player/lazy'
 import Skeleton from '@material-ui/lab/Skeleton';
 import "./VideoDetails.css"
 import config from '../../../constants/config'
+import { Button, Snackbar } from '@material-ui/core';
+import SaveIcon from '@material-ui/icons/Save';
+import { Alert } from '@material-ui/lab';
 const IMG_URL = config.IMG_URL
 
 function VideoDetails() {
     const [albumData, setAlbumData] = useState([])
     const [videoData, setVideoData] = useState([])
     const [skeletonView, setSkeletonView] = useState(true)
+    const [open, setOpen] = useState({ action: false, msg: '', type: false });
     const { id } = useParams()
     useEffect(() => {
         getData(id)
@@ -24,7 +28,22 @@ function VideoDetails() {
         setVideoData(response?.records && response?.records.length && response?.records[0])
         setSkeletonView(false)
     }
+    const addVideoInFavList = async (albumData) => {
+        const userData = getUserData()
+        const formData = {
+            user_id: userData.user_id,
+            album_id: albumData.album_id
+        }
+        const response = await getDaynamicPostData('add_fav_video', formData)
+        setOpen({ action: true, msg: response?.message, type: response?.status })
 
+    }
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen({ action: false, msg: '', type: 'success' });
+    };
     return (
         <Layout >
             {skeletonView &&
@@ -45,7 +64,7 @@ function VideoDetails() {
                             controls={true}
                             playing
                             width="100%"
-                            height="85vh"
+                            height="65vh"
                             playIcon={<img width="10%" alt="play" src={`${IMG_URL}/uploads/play.png`} />}
 
                             url={videoData?.video_link ? `${IMG_URL}/${videoData?.video_link}` : "https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"}
@@ -69,8 +88,25 @@ function VideoDetails() {
                     </div>
                     <div className="video-details-wrapper">
                         <div className="video-details-title">
-                            <h2>{albumData[0].title}</h2>
-                            <h3>{albumData[0].sub_cat_dt?.title}</h3>
+                            <div>
+                                <h2>{albumData[0].title}</h2>
+                                <h3>{albumData[0].sub_cat_dt?.title}</h3>
+                            </div>
+                            <div>
+                                {
+                                    getUserData() && <Button
+                                        variant="contained"
+                                        color="default"
+                                        variant="outlined"
+                                        startIcon={<SaveIcon />}
+                                        onClick={() => { addVideoInFavList(albumData[0]) }}
+                                    >
+                                        Save
+                               </Button>
+                                }
+
+                            </div>
+
                         </div>
                         <div className="video-details-info">
                             <div className="video-details-info-single">
@@ -111,7 +147,24 @@ function VideoDetails() {
                 </>
             }
 
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+                open={open.action}
+                autoHideDuration={6000}
+                onClose={handleClose}
+              >
+                {
+                    <Alert onClose={handleClose} severity={open.type ? "success" : "error"}>
+                        {open.msg}
+                    </Alert>
 
+
+                }
+
+            </Snackbar>
         </Layout>
     );
 }
