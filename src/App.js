@@ -9,6 +9,7 @@ import CategoryVideo from './view/pages/CategoryVideo'
 import Login from './view/pages/Login'
 import Reg from './view/pages/Reg'
 import SavedVideo from './view/pages/SavedVideo'
+import Search from './view/pages//Search'
 import './App.scss';
 import { setMenus } from './services/redux/actions';
 import {getDaynamicPostData} from './services'
@@ -59,6 +60,11 @@ function App({setMenus}) {
             path="/saved-video"
             component={_props => <SavedVideo {..._props} />}
           />
+          <Route
+            path="/search"
+            component={_props => <Search {..._props} />}
+          />
+          
       </Switch>
     </div>
   );

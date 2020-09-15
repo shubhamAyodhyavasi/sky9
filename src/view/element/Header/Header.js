@@ -177,6 +177,13 @@ function Header({ menus }) {
                       <ListItemText primary={title} />
                     </ListItem>
                   ))}
+                  <ListItem button onClick={() => {
+                      history.push(`/search`)
+                    }} >
+                     
+                      <ListItemText primary={"Search"} />
+                    </ListItem>
+                    <Divider />
                   <Divider />
                   {
                     isLogin ? <> 
@@ -203,6 +210,13 @@ function Header({ menus }) {
                 <List style={{
                   width: "100%"
                 }} >
+                   <ListItem button onClick={() => {
+                      history.push(`/search`)
+                    }} >
+                     
+                      <ListItemText primary={"Search"} />
+                    </ListItem>
+                    <Divider />
                   <ListItem button onClick={() => {
                       history.push(`/`)
                     }} >
