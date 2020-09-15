@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Header, Footer} from '../'
 import layoutStyle from './layout.style'
-
 const useStyles = makeStyles(layoutStyle);
 
 export default function Layout({children}) {
@@ -17,6 +16,7 @@ export default function Layout({children}) {
         <div className="p-3"></div>
         {children}
       </div>
+      
       <Footer />
     </div>
   );

@@ -10,6 +10,9 @@ import { connect } from 'react-redux';
 import SearchIcon from '@material-ui/icons/Search';
 import config from '../../../constants/config';
 import logo from '../../../assets/images/sky-logo.png'
+
+
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -98,7 +101,7 @@ function Header({ menus }) {
   const handleDrawerProfileClose = () => {
     setOpenProfile(false);
   };
-  
+
   const isLogin = localStorage.getItem("userDetails");
   return (
     <div >
@@ -256,7 +259,6 @@ function Header({ menus }) {
           </div>
         </Toolbar>
       </AppBar>
-
 
     </div>
   );
