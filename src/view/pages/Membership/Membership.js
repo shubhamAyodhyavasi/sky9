@@ -43,9 +43,14 @@ export default function Membership() {
                                     {itm?.title}
                                 </Typography>
                                 <Divider />
-                                <Typography gutterBottom variant="h5" component="h4" alignt="align">
+                                <Typography gutterBottom variant="body2" component="p" alignt="align">
                                     {itm?.price} Rs.
                                 </Typography>
+                                <Divider />
+                                <Typography gutterBottom variant="body2" component="p" alignt="align">
+                                    {itm?.limitDays} Days
+                                </Typography>
+                                <Divider />
                                 <Divider />
                                 <Typography variant="body2" color="textSecondary" alignt="align" component="p">
                                     {itm?.details}
