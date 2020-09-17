@@ -173,12 +173,15 @@ function Header({ menus }) {
                   width: "100%"
                 }} >
                   {menus.map(({ title, cat_id }) => (
+                    <>
                     <ListItem key={title} button onClick={() => {
                       cat_id && history.push(`/category/${cat_id}`)
                     }} >
                       {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
                       <ListItemText primary={title} />
                     </ListItem>
+                    <Divider />
+                    </>
                   ))}
                   <ListItem button onClick={() => {
                       history.push(`/search`)
@@ -187,12 +190,42 @@ function Header({ menus }) {
                       <ListItemText primary={"Search"} />
                     </ListItem>
                     <Divider />
+                    {
+                    isLogin ? <> 
+                    <ListItem button onClick={() => {
+                      history.push(`/saved-video`)
+                    }} >
+                     
+                      <ListItemText primary={"Saved Video List"} />
+                    </ListItem>
+                    <Divider />
+                  <ListItem button onClick={() => {
+                      history.push(`/profile`)
+                    }} >
+                     
+                      <ListItemText primary={"Profile"} />
+                    </ListItem>
+                    <Divider />
+                    <ListItem button onClick={() => {
+                      history.push(`/membership`)
+                    }} >
+                     
+                      <ListItemText primary={"Membership"} />
+                    </ListItem>
+                    <Divider />
+                    <ListItem button onClick={() => {
+                      history.push(`/change-password`)
+                    }} >
+                     
+                      <ListItemText primary={"Change Password"} />
+                    </ListItem>
+                    <Divider />
+                    </>
+                    :''}
                   <Divider />
                   {
                     isLogin ? <> 
-                      <ListItem button onClick={() => {
-                        history.push(`/`)
-                      }} >
+                      <ListItem button onClick={() => { localStorage.removeItem("userDetails"); history.push(`/`) }} >
                         {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
                         <ListItemText primary={"Logout"} />
                       </ListItem>
