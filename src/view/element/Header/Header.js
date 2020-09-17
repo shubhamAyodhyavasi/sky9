@@ -220,6 +220,13 @@ function Header({ menus }) {
                       <ListItemText primary={"Search"} />
                     </ListItem>
                     <Divider />
+                    <ListItem button onClick={() => {
+                      history.push(`/saved-video`)
+                    }} >
+                     
+                      <ListItemText primary={"Saved Video List"} />
+                    </ListItem>
+                    <Divider />
                   <ListItem button onClick={() => {
                       history.push(`/profile`)
                     }} >
@@ -234,13 +241,14 @@ function Header({ menus }) {
                       <ListItemText primary={"Membership"} />
                     </ListItem>
                     <Divider />
-                   <ListItem button onClick={() => {
-                      history.push(`/saved-video`)
+                    <ListItem button onClick={() => {
+                      history.push(`/change-password`)
                     }} >
                      
-                      <ListItemText primary={"Saved Video List"} />
+                      <ListItemText primary={"Change Password"} />
                     </ListItem>
                     <Divider />
+                   
                   {
                     isLogin ? <> 
                       <ListItem button onClick={() => { localStorage.removeItem("userDetails"); history.push(`/`) }} >

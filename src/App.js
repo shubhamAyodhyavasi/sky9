@@ -12,6 +12,7 @@ import SavedVideo from './view/pages/SavedVideo'
 import Search from './view/pages/Search'
 import Profile from './view/pages/Profile'
 import Membership from './view/pages/Membership'
+import ChangedPassword from './view/pages/ChangedPassword'
 import './App.scss';
 import { setMenus } from './services/redux/actions';
 import {getDaynamicPostData} from './services'
@@ -73,6 +74,10 @@ function App({setMenus}) {
           <Route
             path="/membership"
             component={_props => <Membership {..._props} />}
+          />
+          <Route
+            path="/change-password"
+            component={_props => <ChangedPassword {..._props} />}
           />
           
       </Switch>

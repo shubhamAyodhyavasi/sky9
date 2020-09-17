@@ -21,7 +21,6 @@ export default function Profile() {
             user_id:defaultValue.user_id
         }
         const res = await getDaynamicPostData('updateProfileWithoutPassword', formData)
-        setOpen(true);
         setOpen({ action: true, msg: res?.message, type: res?.status })
         if(res?.status){
             const userData=res?.user_data;
