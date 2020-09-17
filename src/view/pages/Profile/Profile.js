@@ -1,32 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { TextField, Typography, Button,Snackbar } from '@material-ui/core';
-import { useHistory} from 'react-router-dom'
+import { Alert } from '@material-ui/lab';
 import Layout from '../../element/Layout'
-import { getDaynamicPostData } from '../../../services/services'
-import "./Reg.scss"
-export default function Reg() {
-    const history = useHistory();
-    const [open, setOpen] = useState(false);
+import { getDaynamicPostData ,getUserData} from '../../../services/services'
+import "./Profile.scss"
+export default function Profile() {
+    const [open, setOpen] = useState({ action: false, msg: '', type: false });
+    const [defaultValue, setDefaultValue] = useState({});
     const { register, handleSubmit, errors } = useForm();
-    const [regRes, setRegRes]  = useState({})
+    useEffect(()=>{
+        setDefaultValue(getUserData())
+    },[])
     const onSubmit = async (data) => {
         const formData={
             email: data.email,
             password: data.password ,
             name:data.name,
-            mobile:data.mobile
+            mobile:data.mobile,
+            user_id:defaultValue.user_id
         }
-        const res = await getDaynamicPostData('signup_now', formData)
-        setRegRes(res)
+        const res = await getDaynamicPostData('updateProfileWithoutPassword', formData)
         setOpen(true);
+        setOpen({ action: true, msg: res?.message, type: res?.status })
         if(res?.status){
             const userData=res?.user_data;
             const newUserInfo={...userData,password:'xxxxxxx',}
             localStorage.setItem("userDetails", JSON.stringify(newUserInfo));
-            history.push(`/`)
+            
          }
     };
+    
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -38,14 +42,16 @@ export default function Reg() {
         <Layout >
             
 
-            <div className="login-form-wrapper">
-                <div className="form-field-form">
+            <div className="profile-form-wrapper">
+                <div className="profile-field-form">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <Typography variant="h4" >
-                        Sign up for FREE
+                        Update Your Profile
                     </Typography>
+                   {
+                       defaultValue?.name &&
                    
-                        <div className="form-field-wrapper">
+                        <div className="profile-field-wrapper">
                           <TextField
                                 name="name"
                                 inputRef={register({ required: true, maxLength: 80 })}
@@ -55,6 +61,7 @@ export default function Reg() {
                                 color="secondary"
                                 fullWidth
                                 error={errors.name ? true : false}
+                                defaultValue={defaultValue?.name}
                             />
                             <TextField
                                 name="email"
@@ -65,6 +72,7 @@ export default function Reg() {
                                 color="secondary"
                                 fullWidth
                                 error={errors.email ? true : false}
+                                defaultValue={defaultValue?.email}
                             />
                             <TextField
                                 name="mobile"
@@ -76,28 +84,17 @@ export default function Reg() {
                                 fullWidth
                                 color="secondary"
                                 error={errors.mobile ? true : false}
+                                defaultValue={defaultValue?.mobile}
                             />
+                            
 
-                            <TextField
-                                name="password"
-                                type="password"
-                                inputRef={register({ required: true, maxLength: 80 })}
-                                label="Enter password"
-                                margin="normal"
-                                variant="outlined"
-                                fullWidth
-                                color="secondary"
-                                error={errors.password ? true : false}
-                            />
+                            
                         </div>
-
+                    }
                         <Button type="submit" variant="outlined" color="default">
-                            Save
+                            Update
                     </Button>
-                    <div className="reg-footer-links">
-                        <Button color="primary" disabled>Already have an account?</Button>
-                        <Button color="secondary" onClick={()=> { history.push(`/login`)}}> Login</Button>
-                        </div>
+                    
                     </form>
                 </div>
             </div>
@@ -109,13 +106,17 @@ export default function Reg() {
                     vertical: 'top',
                     horizontal: 'right',
                 }}
-                open={open}
+                open={open.action}
                 autoHideDuration={6000}
                 onClose={handleClose}
-                message={regRes?.message}
-               // action={}
-            />
+            >
+                {
+                    <Alert onClose={handleClose} severity={open.type ? "success" : "error"}>
+                        {open.msg}
+                    </Alert>
+                }
 
+            </Snackbar>
         </Layout>
 
     );

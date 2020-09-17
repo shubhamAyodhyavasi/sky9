@@ -9,7 +9,9 @@ import CategoryVideo from './view/pages/CategoryVideo'
 import Login from './view/pages/Login'
 import Reg from './view/pages/Reg'
 import SavedVideo from './view/pages/SavedVideo'
-import Search from './view/pages//Search'
+import Search from './view/pages/Search'
+import Profile from './view/pages/Profile'
+import Membership from './view/pages/Membership'
 import './App.scss';
 import { setMenus } from './services/redux/actions';
 import {getDaynamicPostData} from './services'
@@ -63,6 +65,14 @@ function App({setMenus}) {
           <Route
             path="/search"
             component={_props => <Search {..._props} />}
+          />
+          <Route
+            path="/profile"
+            component={_props => <Profile {..._props} />}
+          />
+          <Route
+            path="/membership"
+            component={_props => <Membership {..._props} />}
           />
           
       </Switch>

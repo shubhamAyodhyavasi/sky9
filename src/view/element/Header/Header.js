@@ -221,14 +221,14 @@ function Header({ menus }) {
                     </ListItem>
                     <Divider />
                   <ListItem button onClick={() => {
-                      history.push(`/`)
+                      history.push(`/profile`)
                     }} >
                      
                       <ListItemText primary={"Profile"} />
                     </ListItem>
                     <Divider />
                     <ListItem button onClick={() => {
-                      history.push(`/`)
+                      history.push(`/membership`)
                     }} >
                      
                       <ListItemText primary={"Membership"} />

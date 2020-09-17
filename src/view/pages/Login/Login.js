@@ -48,6 +48,7 @@ export default function Login() {
                                 variant="outlined"
                                 fullWidth
                                 error={errors.email ? true : false}
+                                color="secondary"
                             />
 
                             <TextField
@@ -59,6 +60,7 @@ export default function Login() {
                                 variant="outlined"
                                 fullWidth
                                 error={errors.password ? true : false}
+                                color="secondary"
                             />
                         </div>
 

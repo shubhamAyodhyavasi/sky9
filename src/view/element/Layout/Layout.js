@@ -14,7 +14,10 @@ export default function Layout({children}) {
       <div className={classes.content}>
         <div className={classes.drawerHeader} />
         <div className="p-3"></div>
+        <div className="main-containr">
         {children}
+        </div>
+        
       </div>
       
       <Footer />
