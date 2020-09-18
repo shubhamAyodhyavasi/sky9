@@ -1,5 +1,8 @@
 export default (theme) => ({
     root: {
+      minHeight: "100vh",
+      display: "flex",
+      flexDirection: "column"
     },
     appBar: {
       transition: theme.transitions.create(['margin', 'width'], {

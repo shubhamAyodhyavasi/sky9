@@ -2,9 +2,9 @@ import React from 'react';
 import clsx from 'clsx';
 import {
   makeStyles, Link, Button, Drawer, Toolbar, AppBar,
-  List, ListItem, ListItemText, Divider,IconButton
+  List, ListItem, ListItemText, Divider, IconButton
 } from '@material-ui/core';
-import { Menu ,AccountCircle} from '@material-ui/icons';
+import { Menu, AccountCircle } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SearchIcon from '@material-ui/icons/Search';
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    backgroundColor:'#1d001d'
+    backgroundColor: '#1d001d'
   },
   drawerHeader: {
     display: 'flex',
@@ -87,7 +87,7 @@ function Header({ menus }) {
   const history = useHistory()
   const [open, setOpen] = React.useState(false);
   const [openProfile, setOpenProfile] = React.useState(false);
-  
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -132,7 +132,7 @@ function Header({ menus }) {
               </ul>
             </div>
             <div className="navigation-menu-user">
-            <IconButton
+              <IconButton
                 edge="end"
                 aria-label="account of current user"
                 aria-controls="primary-search-account-menu"
@@ -140,25 +140,24 @@ function Header({ menus }) {
                 onClick={() => {
                   history.push(`/search/`)
                 }}
-                style={{marginRight:10}}
+                style={{ marginRight: 10 }}
                 color="inherit"
               >
-              <SearchIcon />
+                <SearchIcon />
               </IconButton>
-            
               {
                 isLogin ? <>
                   <IconButton
-                edge="end"
-                aria-label="account of current user"
-                aria-controls="primary-search-account-menu"
-                aria-haspopup="true"
-                 onClick={handleDrawerProfileOpen}
-                color="inherit"
-              >
-              <AccountCircle />
-              </IconButton>
-                 
+                    edge="end"
+                    aria-label="account of current user"
+                    aria-controls="primary-search-account-menu"
+                    aria-haspopup="true"
+                    onClick={handleDrawerProfileOpen}
+                    color="inherit"
+                  >
+                    <AccountCircle />
+                  </IconButton>
+
                 </> :
                   <Button onClick={() => { history.push(`/login`) }} className="navigation-menu__link" >Login</Button>
               }
@@ -174,68 +173,68 @@ function Header({ menus }) {
                 }} >
                   {menus.map(({ title, cat_id }) => (
                     <>
-                    <ListItem key={title} button onClick={() => {
-                      cat_id && history.push(`/category/${cat_id}`)
-                    }} >
-                      {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-                      <ListItemText primary={title} />
-                    </ListItem>
-                    <Divider />
+                      <ListItem key={title} button onClick={() => {
+                        cat_id && history.push(`/category/${cat_id}`)
+                      }} >
+                        {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+                        <ListItemText primary={title} />
+                      </ListItem>
+                      <Divider />
                     </>
                   ))}
+                  
                   <ListItem button onClick={() => {
-                      history.push(`/search`)
-                    }} >
-                     
-                      <ListItemText primary={"Search"} />
-                    </ListItem>
-                    <Divider />
-                    {
-                    isLogin ? <> 
-                    <ListItem button onClick={() => {
-                      history.push(`/saved-video`)
-                    }} >
-                     
-                      <ListItemText primary={"Saved Video List"} />
-                    </ListItem>
-                    <Divider />
-                  <ListItem button onClick={() => {
-                      history.push(`/profile`)
-                    }} >
-                     
-                      <ListItemText primary={"Profile"} />
-                    </ListItem>
-                    <Divider />
-                    <ListItem button onClick={() => {
-                      history.push(`/membership`)
-                    }} >
-                     
-                      <ListItemText primary={"Membership"} />
-                    </ListItem>
-                    <Divider />
-                    <ListItem button onClick={() => {
-                      history.push(`/change-password`)
-                    }} >
-                     
-                      <ListItemText primary={"Change Password"} />
-                    </ListItem>
-                    <Divider />
-                    </>
-                    :''}
+                    history.push(`/search`)
+                  }} >
+                    <ListItemText primary={"Search"} />
+                  </ListItem>
                   <Divider />
                   {
-                    isLogin ? <> 
+                    isLogin ? <>
+                      <ListItem button onClick={() => {
+                        history.push(`/saved-video`)
+                      }} >
+
+                        <ListItemText primary={"Saved Video List"} />
+                      </ListItem>
+                      <Divider />
+                      <ListItem button onClick={() => {
+                        history.push(`/profile`)
+                      }} >
+
+                        <ListItemText primary={"Profile"} />
+                      </ListItem>
+                      <Divider />
+                      <ListItem button onClick={() => {
+                        history.push(`/membership`)
+                      }} >
+
+                        <ListItemText primary={"Membership"} />
+                      </ListItem>
+                      <Divider />
+                      <ListItem button onClick={() => {
+                        history.push(`/change-password`)
+                      }} >
+
+                        <ListItemText primary={"Change Password"} />
+                      </ListItem>
+                      <Divider />
+                    </>
+                      : ''}
+                  <Divider />
+                  {
+                    isLogin ? <>
                       <ListItem button onClick={() => { localStorage.removeItem("userDetails"); history.push(`/`) }} >
                         {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
                         <ListItemText primary={"Logout"} />
                       </ListItem>
                     </> :
-                    <ListItem button onClick={() => {
-                      history.push(`/login`)
-                    }} >
-                      {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-                      <ListItemText primary={"Login"} />
-                    </ListItem>
+                      <ListItem button onClick={() => {
+                        history.push(`/login`)
+                      }} >
+                        {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+                        <ListItemText primary={"Login"} />
+                      </ListItem>
                   }
                 </List>
               </Drawer>
@@ -246,53 +245,46 @@ function Header({ menus }) {
                 <List style={{
                   width: "100%"
                 }} >
-                   <ListItem button onClick={() => {
-                      history.push(`/search`)
-                    }} >
-                     
-                      <ListItemText primary={"Search"} />
-                    </ListItem>
-                    <Divider />
-                    <ListItem button onClick={() => {
-                      history.push(`/saved-video`)
-                    }} >
-                     
-                      <ListItemText primary={"Saved Video List"} />
-                    </ListItem>
-                    <Divider />
                   <ListItem button onClick={() => {
-                      history.push(`/profile`)
-                    }} >
-                     
-                      <ListItemText primary={"Profile"} />
-                    </ListItem>
-                    <Divider />
-                    <ListItem button onClick={() => {
-                      history.push(`/membership`)
-                    }} >
-                     
-                      <ListItemText primary={"Membership"} />
-                    </ListItem>
-                    <Divider />
-                    <ListItem button onClick={() => {
-                      history.push(`/change-password`)
-                    }} >
-                     
-                      <ListItemText primary={"Change Password"} />
-                    </ListItem>
-                    <Divider />
-                   
+                    history.push(`/saved-video`)
+                  }} >
+
+                    <ListItemText primary={"Saved Video List"} />
+                  </ListItem>
+                  <Divider />
+                  <ListItem button onClick={() => {
+                    history.push(`/profile`)
+                  }} >
+
+                    <ListItemText primary={"Profile"} />
+                  </ListItem>
+                  <Divider />
+                  <ListItem button onClick={() => {
+                    history.push(`/membership`)
+                  }} >
+
+                    <ListItemText primary={"Membership"} />
+                  </ListItem>
+                  <Divider />
+                  <ListItem button onClick={() => {
+                    history.push(`/change-password`)
+                  }} >
+
+                    <ListItemText primary={"Change Password"} />
+                  </ListItem>
+                  <Divider />
+
                   {
-                    isLogin ? <> 
+                    isLogin ? <>
                       <ListItem button onClick={() => { localStorage.removeItem("userDetails"); history.push(`/`) }} >
                         <ListItemText primary={"Logout"} />
                       </ListItem>
                     </> :
-                    <ListItem button onClick={() => {
-                      history.push(`/login`)
-                    }} >
-                     <ListItemText primary={"Login"} />
-                    </ListItem>
+                      <ListItem button onClick={() => {
+                        history.push(`/login`)
+                      }} >
+                        <ListItemText primary={"Login"} />
+                      </ListItem>
                   }
                 </List>
               </Drawer>

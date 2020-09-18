@@ -53,7 +53,7 @@ function Album() {
                         <Grid container spacing={3}>
                             {
                                 albumList.map((item, key) => (
-                                    <Grid key={key} item lg={3} md={4} sm={6} xs={12} >
+                                    <Grid key={key} item lg={2} md={3} sm={4} xs={6} >
                                         <AlbumCart albumDetails={convertIntoFormat(item)} />
                                     </Grid>
                                 ))

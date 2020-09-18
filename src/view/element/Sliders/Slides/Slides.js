@@ -85,7 +85,9 @@ export default function Slides({ title, items, allLink }) {
                         {title}
                     </Typography>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={4} style={{
+                    paddingLeft: 0
+                }} >
                     <Typography variant="h6" align="right">
                         <Button color="inherit" onClick={() => {
                             history.push(allLink)

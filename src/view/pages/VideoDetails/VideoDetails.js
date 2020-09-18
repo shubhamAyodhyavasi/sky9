@@ -6,7 +6,7 @@ import ReactPlayer from 'react-player/lazy'
 import Skeleton from '@material-ui/lab/Skeleton';
 import "./VideoDetails.css"
 import config from '../../../constants/config'
-import { Button, Snackbar ,Grid} from '@material-ui/core';
+import { Button, Snackbar, Grid } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import { Alert } from '@material-ui/lab';
 const IMG_URL = config.IMG_URL
@@ -64,7 +64,6 @@ function VideoDetails() {
                             controls={true}
                             playing
                             width="100%"
-                            height="65vh"
                             playIcon={<img width="10%" alt="play" src={`${IMG_URL}/uploads/play.png`} />}
 
                             url={videoData?.video_link ? `${IMG_URL}/${videoData?.video_link}` : "https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"}
@@ -95,7 +94,6 @@ function VideoDetails() {
                             <div>
                                 {
                                     getUserData() && <Button
-                                        variant="contained"
                                         color="default"
                                         variant="outlined"
                                         startIcon={<SaveIcon />}
@@ -127,23 +125,23 @@ function VideoDetails() {
                             <p>{albumData[0].details}</p>
                         </div>
                         <div className="video-details-more-video">
-                            <h2>Trailers & More</h2>
+                            <h2>Trailers &amp; More</h2>
                             <div className="video-details-more-video-wrapper">
                                 <Grid container spacing={3}>
-                                
-                                {
-                                    albumData?.map((data, index) =>
-                                        <div key={index} className="video-details-more-video-cart">
-                                            <Grid key={index} item lg={3} md={4} sm={6} xs={6} >
-                                                <span onClick={() => { setVideoData(data) }}>
-                                                    <img  alt="" src={`${IMG_URL}/${data?.image}`} />
-                                                    <h3>{data?.title}</h3>
-                                                </span>
+
+                                    {
+                                        albumData?.map((data, index) =>
+                                            <Grid key={index} item lg={2} md={3} sm={4} xs={6} >
+                                                <div key={index} className="video-details-more-video-cart">
+                                                    <span onClick={() => { setVideoData(data) }}>
+                                                        <img alt="" style={{ maxWidth: "100%" }} src={`${IMG_URL}/${data?.image}`} />
+                                                        <h3>{data?.title}</h3>
+                                                    </span>
+                                                </div>
                                             </Grid>
 
-                                        </div>
-                                    )
-                                }
+                                        )
+                                    }
                                 </Grid>
 
                             </div>
