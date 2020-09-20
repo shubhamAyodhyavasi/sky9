@@ -10,6 +10,7 @@ export default function AlbumCart({ albumDetails }) {
             backgroundImage: `url(${img})`,
         }}>
             {totalView}
+            <img className="album-cart-wrapper__bg" alt={title} src={img} />
             <div className="album-cart-wrapper-footer">
                 <h3 style={{
                     cursor: 'pointer'

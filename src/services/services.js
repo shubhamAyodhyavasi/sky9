@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import {config} from '../constants'
-const baseUrl = config.CORS_PROXY + 'http://fantasymedia.in/sky9/index.php/apis';
+const baseUrl = config.CORS_PROXY + config.SERVER_BASE_URL;
 export const getDaynamicGetData = async (endPoint, id) => {
     return await fetch(baseUrl + endPoint + '?id=' + id )
       .then((response) => response.json())

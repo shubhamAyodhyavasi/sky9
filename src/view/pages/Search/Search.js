@@ -39,7 +39,7 @@ export default function Search() {
                         <div className="form-field-search-wrapper">
                             <TextField
                                 name="search"
-                                label="Search for Movies, Shows, Channels etc."
+                                label="Search for Movies, Shows etc."
                                 margin="normal"
                                 variant="outlined"
                                 fullWidth

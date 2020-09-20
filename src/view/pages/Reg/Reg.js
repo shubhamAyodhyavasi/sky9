@@ -35,7 +35,7 @@ export default function Reg() {
         setOpen(false);
     };
     return (
-        <Layout >
+        <Layout centered >
             
 
             <div className="login-form-wrapper">

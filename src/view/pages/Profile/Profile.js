@@ -38,7 +38,7 @@ export default function Profile() {
         setOpen(false);
     };
     return (
-        <Layout >
+        <Layout centered >
             
 
             <div className="profile-form-wrapper">

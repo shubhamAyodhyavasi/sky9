@@ -21,11 +21,25 @@
         position: absolute;
         z-index: 3;
     }
+    &__bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        left: 0;
+        right: 0;
+        top: 0;
+        z-index: 1;
+        bottom: 0;
+    }
     &:before {
         width: 100%;
         padding-top: 130%;
         content: "";
         display: block;
+        @media screen and (max-width: 800px){
+            padding-top: 70%;
+        }
     }
     &:after {
         z-index: 0;

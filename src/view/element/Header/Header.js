@@ -4,7 +4,7 @@ import {
   makeStyles, Link, Button, Drawer, Toolbar, AppBar,
   List, ListItem, ListItemText, Divider, IconButton
 } from '@material-ui/core';
-import { Menu, AccountCircle } from '@material-ui/icons';
+import { Menu, AccountCircle, Search } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SearchIcon from '@material-ui/icons/Search';
@@ -163,6 +163,9 @@ function Header({ menus }) {
               }
             </div>
             <div className="mobile-nav">
+              <Button onClick={() => {
+                history.push(`/search`)
+              }}><Search /></Button>
               <Button onClick={handleDrawerOpen}><Menu /></Button>
               <Drawer classes={{
                 paper: classes.drawerPaper,
@@ -183,11 +186,11 @@ function Header({ menus }) {
                     </>
                   ))}
                   
-                  <ListItem button onClick={() => {
+                  {/* <ListItem button onClick={() => {
                     history.push(`/search`)
                   }} >
                     <ListItemText primary={"Search"} />
-                  </ListItem>
+                  </ListItem> */}
                   <Divider />
                   {
                     isLogin ? <>

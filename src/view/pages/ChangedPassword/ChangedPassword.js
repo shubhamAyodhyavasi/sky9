@@ -20,7 +20,7 @@ export default function ChangedPassword() {
         setOpen(false);
     };
     return (
-        <Layout >
+        <Layout centered >
 
 
             <div className="login-form-wrapper">

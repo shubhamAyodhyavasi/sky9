@@ -69,7 +69,7 @@ export default function Slides({ title, items, allLink }) {
         const newdata = {
             title: itm.details,
             id: itm.album_id,
-            img: `${IMG_URL}/${itm?.image}`,
+            img: `${IMG_URL}${itm?.image}`,
         }
         return newdata
     }

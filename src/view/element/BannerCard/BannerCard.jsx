@@ -1,5 +1,6 @@
 import React from 'react'
-const IMG_URL="http://fantasymedia.in/sky9/"
+import {config} from '../../../constants'
+const IMG_URL= config.IMG_URL // "http://fantasymedia.in/sky9/"
 function BannerCard({image, title, onCLick}) {
     return (
         <div onClick={onCLick} className="banner-card" style={{
