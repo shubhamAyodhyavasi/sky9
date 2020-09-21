@@ -8,14 +8,14 @@ import AlbumCart from '../../AlbumCart'
 import config from '../../../../constants/config'
 const IMG_URL= config.IMG_URL
 
-export default function Slides({ title, items, allLink }) {
+export default function Slides({ title, items, allLink, isSmall }) {
     const history = useHistory()
     const sliderConfig = {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 6,
-        slidesToScroll: 6,
+        slidesToShow: isSmall ? 4 : 6,
+        slidesToScroll: isSmall ? 4 : 6,
         responsive: [
             {
                 breakpoint: 1400,
@@ -100,7 +100,7 @@ export default function Slides({ title, items, allLink }) {
             <div className="album-slider__slider">
                 <Slider {...sliderConfig} >
                     {
-                        items.map((item, i) => <Item key={i} item={convertIntoFormat(item)} />)
+                        items.map((item, i) => <Item key={i} isSmall={isSmall} t={item} item={convertIntoFormat(item)} />)
                     }
                 </Slider>
             </div>
@@ -108,10 +108,10 @@ export default function Slides({ title, items, allLink }) {
     )
 }
 
-function Item({ item }) {
+function Item({ item, isSmall }) {
     return (
         <div className="album-slider__item" >
-            <AlbumCart albumDetails={item} />
+            <AlbumCart albumDetails={item} isSmall={isSmall} />
         </div>
     )
 }

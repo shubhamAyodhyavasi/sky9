@@ -37,9 +37,9 @@
         padding-top: 130%;
         content: "";
         display: block;
-        @media screen and (max-width: 800px){
-            padding-top: 70%;
-        }
+        // @media screen and (max-width: 800px){
+        //     padding-top: 70%;
+        // }
     }
     &:after {
         z-index: 0;
@@ -49,6 +49,11 @@
         background: linear-gradient(0deg, rgba(0,0,0, 0.67) 0%, transparent 100%);
         content: '';
         bottom: 0;
+    }
+    &--small{
+        &:before {
+            padding-top: 70%;
+        }
     }
 }
 

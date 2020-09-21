@@ -40,7 +40,7 @@ function Home() {
           <BannerSlider items={homePageData?.bannerRecord} />
           {
             homePageData?.records?.map((itm, index) =>
-              <Slides key={index} itm={itm} items={getItems(itm?.album)} allLink={`/album/${itm?.cat?.cat_id}`} title={itm.cat.title} />
+              <Slides key={index} itm={itm} items={getItems(itm?.album)} isSmall={itm?.cat?.cat_view_type === "1"} allLink={`/album/${itm?.cat?.cat_id}`} title={itm.cat.title} />
             )
           }
 

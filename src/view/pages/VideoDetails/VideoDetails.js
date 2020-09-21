@@ -77,10 +77,10 @@ function VideoDetails() {
                                     },
 
                                     nodownload: true,
-                                    tracks: [
-                                        { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'en', default: true },
-                                        { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'hi' }
-                                    ]
+                                    // tracks: [
+                                    //     { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'en', default: true },
+                                    //     { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'hi' }
+                                    // ]
                                 }
                             }}
                         />

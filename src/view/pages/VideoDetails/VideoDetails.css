@@ -22,7 +22,9 @@
     margin-right: 10px;
     cursor: pointer;
 }
-
+video:focus {
+    outline: none;
+}
 @media (orientation: landscape) {
     .video-player-wrapper {
         height: 65vh;
