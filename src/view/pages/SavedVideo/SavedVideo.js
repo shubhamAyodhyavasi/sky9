@@ -57,8 +57,8 @@ function SavedVideo() {
                         <Grid container spacing={3}>
                             {
                                 albumList.map((item, key) => (
-                                    <Grid key={key} item lg={3} md={4} sm={6} xs={12} >
-                                        <AlbumCart albumDetails={convertIntoFormat(item)} />
+                                    <Grid key={key} item lg={2} md={3} sm={4} xs={4} >
+                                        <AlbumCart isSmall={true} albumDetails={convertIntoFormat(item)} />
                                     </Grid>
                                 ))
                             }

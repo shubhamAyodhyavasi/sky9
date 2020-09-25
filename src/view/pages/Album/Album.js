@@ -54,7 +54,7 @@ function Album() {
                         <Grid container spacing={3}>
                             {
                                 albumList.map((item, key) => (
-                                    <Grid key={key} item lg={item?.cat_dt?.cat_view_type === "1" ? 3 : 2} md={3} sm={4} xs={6} >
+                                    <Grid key={key} item lg={2} md={3} sm={3} xs={3} >
                                         <AlbumCart isSmall={item?.cat_dt?.cat_view_type === "1"} albumDetails={convertIntoFormat(item)} />
                                     </Grid>
                                 ))

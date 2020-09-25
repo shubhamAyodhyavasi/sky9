@@ -14,8 +14,8 @@ export default function Slides({ title, items, allLink, isSmall }) {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: isSmall ? 4 : 6,
-        slidesToScroll: isSmall ? 4 : 6,
+        slidesToShow: 6,
+        slidesToScroll: 6,
         responsive: [
             {
                 breakpoint: 1400,
@@ -41,8 +41,8 @@ export default function Slides({ title, items, allLink, isSmall }) {
             {
                 breakpoint: 700,
                 settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
                     arrows: false
                 }
             },
@@ -57,8 +57,8 @@ export default function Slides({ title, items, allLink, isSmall }) {
             {
                 breakpoint: 450,
                 settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
                     arrows: false
                 }
             },
@@ -78,7 +78,7 @@ export default function Slides({ title, items, allLink, isSmall }) {
     return (
         <div className="album-slider">
             <Grid container spacing={3} style={{
-                marginBottom: 10
+                // marginBottom: 10
             }} >
                 <Grid item xs={8}>
                     <Typography variant="h6" align="left">

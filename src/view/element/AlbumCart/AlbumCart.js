@@ -16,6 +16,9 @@ export default function AlbumCart({ albumDetails, isSmall }) {
             <img className="album-cart-wrapper__bg" alt={title} src={img} />
             <div className="album-cart-wrapper-footer">
                 <Button 
+                    style={{
+                        minWidth: '40px'
+                    }}
                     onClick={()=>{
                         history.push(`/video/${id}`)
                     }}  >
