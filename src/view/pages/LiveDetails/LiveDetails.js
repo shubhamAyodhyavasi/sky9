@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
-import { getDaynamicPostData, getUserData } from '../../../services/services'
+import { getDaynamicPostData } from '../../../services/services'
 import Layout from '../../element/Layout'
 import ReactPlayer from 'react-player/lazy'
 import Skeleton from '@material-ui/lab/Skeleton';
 import "./LiveDetails.scss"
 import config from '../../../constants/config'
-import { Button, Snackbar, Grid } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
-const IMG_URL = config.IMG_URL
 
 function LiveDetails() {
-    const [liveData, setLiveData] = useState([])
+    const [liveData, setLiveData] = useState(null)
     const [skeletonView, setSkeletonView] = useState(true)
     const { id } = useParams()
     useEffect(() => {
@@ -23,21 +20,21 @@ function LiveDetails() {
         const response = await getDaynamicPostData('getSingleLiveVideo', { live_id: id })
         console.log('xx',{response})
         setLiveData( response?.records)
-        setSkeletonView(false)
+        setTimeout(()=>{setSkeletonView(false)},2000)
+        
     }
    
     return (
         <Layout >
             {skeletonView &&
                 <>
-                    <Skeleton variant="rect" width="100%" height="85vh" />
-                    <Skeleton variant="text" width="25%" style={{ marginTop: 20 }} />
+                    <Skeleton variant="rect" width="100%" height="60vh" />
                     <Skeleton variant="text" width="25%" style={{ marginTop: 20 }} />
                     <Skeleton variant="text" width="100%" style={{ marginTop: 40 }} />
                 </>
             }
             {
-                liveData &&
+                liveData && !skeletonView &&
                 <>
 
 

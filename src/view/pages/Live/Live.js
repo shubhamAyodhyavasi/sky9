@@ -16,9 +16,8 @@ function Live() {
     } = useParams()
     const getData = async (id) => {
         const response = await getDaynamicPostData('getLiveVideo', {})
-        console.log({response})
-        setAlbumList((response?.records && response?.records.length && response?.records) || [])
-        setSkeletonView(false)
+       setAlbumList((response?.records && response?.records.length && response?.records) || [])
+         setSkeletonView(false)
     }
     useEffect(() => {
         getData(id)
