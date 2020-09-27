@@ -12,6 +12,8 @@ import SavedVideo from './view/pages/SavedVideo'
 import Search from './view/pages/Search'
 import Profile from './view/pages/Profile'
 import Membership from './view/pages/Membership'
+import Live from './view/pages/Live'
+import LiveDetails from './view/pages/LiveDetails'
 import ChangedPassword from './view/pages/ChangedPassword'
 import './App.scss';
 import { setMenus } from './services/redux/actions';
@@ -70,6 +72,14 @@ function App({setMenus}) {
           <Route
             path="/profile"
             component={_props => <Profile {..._props} />}
+          />
+          <Route
+            path="/lives"
+            component={_props => <Live {..._props} />}
+          />
+          <Route
+            path="/live/:id"
+            component={_props => <LiveDetails {..._props} />}
           />
           <Route
             path="/membership"

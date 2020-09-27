@@ -129,6 +129,11 @@ function Header({ menus }) {
                     </li>
                   )
                 }
+                <li className="navigation-menu__item"  >
+                      <Button onClick={() => {
+                         history.push(`/lives`)
+                      }} className="navigation-menu__link" >Live</Button>
+                    </li>
               </ul>
             </div>
             <div className="navigation-menu-user">
