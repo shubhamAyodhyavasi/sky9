@@ -14,11 +14,14 @@ import Profile from './view/pages/Profile'
 import Membership from './view/pages/Membership'
 import Live from './view/pages/Live'
 import LiveDetails from './view/pages/LiveDetails'
+import Theater from './view/pages/Theater'
+import TheaterDetails from './view/pages/TheaterDetails'
 import ChangedPassword from './view/pages/ChangedPassword'
 import './App.scss';
 import { setMenus } from './services/redux/actions';
 import {getDaynamicPostData} from './services'
 import { config } from './constants';
+
 function App({setMenus}) {
   useEffect(() => {
     getDaynamicPostData('getCategory', { cat_id: config.CATEGORY_ID_LIST.home })
@@ -81,6 +84,15 @@ function App({setMenus}) {
             path="/live/:id"
             component={_props => <LiveDetails {..._props} />}
           />
+          <Route
+            path="/theaters"
+            component={_props => <Theater {..._props} />}
+          />
+          <Route
+            path="/theater/:id"
+            component={_props => <TheaterDetails {..._props} />}
+          />
+          
           <Route
             path="/membership"
             component={_props => <Membership {..._props} />}

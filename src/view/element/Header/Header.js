@@ -130,10 +130,15 @@ function Header({ menus }) {
                   )
                 }
                 <li className="navigation-menu__item"  >
-                      <Button onClick={() => {
-                         history.push(`/lives`)
-                      }} className="navigation-menu__link" >Live</Button>
-                    </li>
+                  <Button onClick={() => {
+                    history.push(`/lives`)
+                  }} className="navigation-menu__link" >Live</Button>
+                </li>
+                <li className="navigation-menu__item"  >
+                  <Button onClick={() => {
+                    history.push(`/theaters`)
+                  }} className="navigation-menu__link" >Theater</Button>
+                </li>
               </ul>
             </div>
             <div className="navigation-menu-user">
@@ -190,12 +195,23 @@ function Header({ menus }) {
                       <Divider />
                     </>
                   ))}
+                  <ListItem  button onClick={() => {
+                        history.push(`/lives`)
+                      }} >
+                        <ListItemText primary='Live' />
+                      </ListItem>
+                      <Divider />
+                    
                   
-                  {/* <ListItem button onClick={() => {
-                    history.push(`/search`)
-                  }} >
-                    <ListItemText primary={"Search"} />
-                  </ListItem> */}
+                  <Divider />
+                  <ListItem  button onClick={() => {
+                        history.push(`/theaters`)
+                      }} >
+                        <ListItemText primary='Theater' />
+                      </ListItem>
+                      <Divider />
+                    
+                  
                   <Divider />
                   {
                     isLogin ? <>
