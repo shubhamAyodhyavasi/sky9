@@ -1,5 +1,16 @@
-.album-list-wrapper {
+.live-list-wrapper {
+    width: 100%;
+}
+
+.live-list-single-wrapper {
+    width: 100%;
+}
+.live-list-single-list{
     display: flex;
+    justify-content: start;
     flex-wrap: wrap;
-    justify-content: space-between;
+    width: 100%;
+    .MuiGrid-root{
+        margin-right: 10px;
+    }
 }

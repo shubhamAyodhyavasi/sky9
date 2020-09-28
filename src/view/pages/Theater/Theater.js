@@ -6,6 +6,7 @@ import Layout from '../../element/Layout'
 import Skeleton from '@material-ui/lab/Skeleton';
 import './Theater.scss'
 import LiveCart from './LiveCart'
+import Slides from './Sliders/Slides'
 import config from '../../../constants/config'
 const IMG_URL = config.IMG_URL
 function Theater() {
@@ -14,6 +15,22 @@ function Theater() {
     const {
         id
     } = useParams()
+    const getItems = (itemsArr = []) => {
+        if(itemsArr.length < 6){
+          switch (itemsArr.length) {
+            case 5:
+            case 4:
+            case 3:
+              return [...itemsArr, ...itemsArr]
+            case 2:
+            case 1:
+              return [...itemsArr, ...itemsArr, ...itemsArr, ...itemsArr, ...itemsArr, ...itemsArr]
+            default:
+              return [...itemsArr, ...itemsArr]
+          }
+        }
+        return itemsArr
+      }
     const getData = async (id) => {
         const response = await getDaynamicPostData('getTheaterVideo', {})
        setAlbumList((response?.records && response?.records.length && response?.records) || [])
@@ -46,10 +63,15 @@ function Theater() {
                 albumList.length > 0 &&
                 <>
                     <div>
-
+                    {
+                                albumList.map((item, key) => (
+                                    <Slides key={key}  items={getItems(item?.theater)} isSmall={true} allLink={`/theater-single/${item?.cat?.cat_id}`} title={item.cat.title} />
+                                ))
+                            }
+                      
                     </div>
 
-                    <div className="theater-list-wrapper">
+                    {/* <div className="theater-list-wrapper">
                         <Grid container spacing={3}>
                             {
                                 albumList.map((item, key) => (
@@ -59,7 +81,7 @@ function Theater() {
                                 ))
                             }
                         </Grid>
-                    </div>
+                    </div> */}
                 </>
             }
 

@@ -6,6 +6,7 @@ import { Button } from '@material-ui/core';
 
 export default function LiveCart({ albumDetails, isSmall }) {
     const { title, img, totalView, id } = albumDetails
+    console.log('xx',albumDetails)
     const history = useHistory();
     return (
         <div className={`album-cart-wrapper ${isSmall ? "album-cart-wrapper--small" : ""}`} 

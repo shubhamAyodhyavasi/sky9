@@ -23,6 +23,7 @@ function Live() {
         getData(id)
     }, [id]);
     const convertIntoFormat = (itm) => {
+        console.log('xx',{itm})
         const newdata = {
             title: itm.title,
             id: itm.live_id,
@@ -49,13 +50,29 @@ function Live() {
 
                     </div>
 
-                    <div className="album-list-wrapper">
+                    <div className="live-list-wrapper">
                         <Grid container spacing={3}>
                             {
-                                albumList.map((item, key) => (
-                                    <Grid key={key} item lg={2} md={3} sm={3} xs={3} >
-                                        <LiveCart isSmall={true} albumDetails={convertIntoFormat(item?.liveVideo)} />
-                                    </Grid>
+                                albumList?.map((item, key) => (
+                                    <div key={key} className="live-list-single-wrapper">
+                                        <div className="live-list-single-title">
+                                           <h3>{item?.cat?.title}</h3>
+                                        </div>
+                                        <div className="live-list-single-list">
+                                        {
+                                            item?.live?.map((item2, key2) => (
+                                              
+                                                <Grid key={key2} item lg={2} md={3} sm={3} xs={3} >
+                                                    <LiveCart isSmall={true} albumDetails={convertIntoFormat(item2)} />
+                                                    
+                                                </Grid>
+                                            ))
+                                        }
+                                        </div>
+                                        
+                                               
+                                    </div>
+                                    
                                 ))
                             }
                         </Grid>
