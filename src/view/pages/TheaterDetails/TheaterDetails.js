@@ -12,7 +12,7 @@ import { Alert } from '@material-ui/lab';
 const IMG_URL = config.IMG_URL
 
 function TheaterDetails() {
-    const [albumData, setAlbumData] = useState(null)
+    const [albumData, setAlbumData] = useState(false)
     const [videoData, setVideoData] = useState(null)
     const [skeletonView, setSkeletonView] = useState(true)
     const [open, setOpen] = useState({ action: false, msg: '', type: false });
@@ -24,8 +24,8 @@ function TheaterDetails() {
     const getData = async (id) => {
         if (!id) return
         const response = await getDaynamicPostData('getSingleTheaterVideo', { video_id: id })
-        setAlbumData(response?.records )
-        setVideoData(response?.records )
+        setAlbumData( false )
+        setVideoData(response?.records)
         setSkeletonView(false)
     }
    
@@ -35,7 +35,7 @@ function TheaterDetails() {
         }
         setOpen({ action: false, msg: '', type: 'success' });
     };
-    console.log('xx',{albumData})
+  
     return (
         <Layout >
             {skeletonView &&
@@ -47,7 +47,7 @@ function TheaterDetails() {
                 </>
             }
             {
-                albumData && !skeletonView &&
+                videoData && !skeletonView &&
                 <>
 
 
@@ -57,10 +57,7 @@ function TheaterDetails() {
                             playing
                             width="100%"
                             playIcon={<img width="10%" alt="play" src={`${IMG_URL}/uploads/play.png`} />}
-                            url={[
-                                `${IMG_URL}/${videoData?.trailer_url}`,
-                                `${IMG_URL}/${videoData?.video_link}` 
-                              ]}
+                            url={albumData ? `${IMG_URL}/${videoData?.video_link}`  : `${IMG_URL}/${videoData?.trailer_url}`}
                             light={`${IMG_URL}/${videoData?.image}`}
                             config={{
                                 file: {
@@ -70,10 +67,7 @@ function TheaterDetails() {
                                     },
 
                                     nodownload: true,
-                                    // tracks: [
-                                    //     { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'en', default: true },
-                                    //     { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'hi' }
-                                    // ]
+                                    
                                 }
                             }}
                         />
@@ -81,8 +75,8 @@ function TheaterDetails() {
                     <div className="theater-details-wrapper">
                         <div className="theater-details-title">
                             <div>
-                                <h2>{albumData.title}</h2>
-                                <h3>{albumData.sub_cat_dt?.title}</h3>
+                                <h2>{videoData.title}</h2>
+                                <h3>{videoData.subDetails}</h3>
                             </div>
                             <div>
                                 
@@ -90,25 +84,50 @@ function TheaterDetails() {
                             </div>
 
                         </div>
-                        {/* <div className="theater-details-info">
+                        <div className="theater-details-info">
                             <div className="theater-details-info-single">
                                 <h4>Released On</h4>
-                                <p>{videoData?.album_dt?.release_date}</p>
+                                <p>{videoData?.releasedOn}</p>
                             </div>
                             <div className="theater-details-info-single">
                                 <h4>Video Length</h4>
-                                <p>{videoData?.album_dt?.video_duration}</p>
+                                <p>{videoData?.totalTime}</p>
                             </div>
                             <div className="theater-details-info-single">
                                 <h4>Language</h4>
-                                <p>{videoData?.album_dt?.langauge}</p>
+                                <p>{videoData?.language}</p>
                             </div>
 
-                        </div> */}
+                        </div>
                         <div className="theater-details-subDetails">
                             <p>{albumData.details}</p>
                         </div>
-                        
+                        <div className="theater-details-more-video">
+                            <h2>Trailers &amp; More</h2>
+                            <div className="theater-details-more-video-wrapper">
+                                <Grid container spacing={3}>
+
+                                            <Grid  item lg={2} md={3} sm={4} xs={6} >
+                                                <div  className="video-details-more-video-cart">
+                                                    <span onClick={() => { setAlbumData(true) }}>
+                                                        <img alt="" style={{ maxWidth: "100%" }} src={`${IMG_URL}/${videoData?.image}`} />
+                                                        <h3>{videoData?.title} (Movie)</h3>
+                                                    </span>
+                                                </div>
+                                                
+                                            </Grid>
+                                            <Grid  item lg={2} md={3} sm={4} xs={6} >
+                                            <div  className="video-details-more-video-cart">
+                                                    <span onClick={() => { setAlbumData(false) }}>
+                                                        <img alt="" style={{ maxWidth: "100%" }} src={`${IMG_URL}/${videoData?.image}`} />
+                                                        <h3>{videoData?.title} (Trailer)</h3>
+                                                    </span>
+                                                </div>
+                                            </Grid>
+                                 </Grid>
+                             </div>
+
+                        </div>
                     </div>
                 </>
             }

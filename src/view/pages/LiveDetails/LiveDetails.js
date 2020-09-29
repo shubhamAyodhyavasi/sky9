@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import { getDaynamicPostData } from '../../../services/services'
+import { useHistory} from 'react-router-dom'
 import Layout from '../../element/Layout'
 import ReactPlayer from 'react-player/lazy'
 import Skeleton from '@material-ui/lab/Skeleton';
+import {  Grid } from '@material-ui/core';
 import "./LiveDetails.scss"
 import config from '../../../constants/config'
-
+const IMG_URL = config.IMG_URL
 function LiveDetails() {
+    const history = useHistory();
     const [liveData, setLiveData] = useState(null)
+    const [relatedData, setRelatedData] = useState([])
     const [skeletonView, setSkeletonView] = useState(true)
     const { id } = useParams()
     useEffect(() => {
@@ -18,8 +22,8 @@ function LiveDetails() {
     const getData = async (id) => {
         if (!id) return
         const response = await getDaynamicPostData('getSingleLiveVideo', { live_id: id })
-        console.log('xx',{response})
         setLiveData( response?.records)
+        setRelatedData(response?.relatedLiveChanel)
         setTimeout(()=>{setSkeletonView(false)},2000)
         
     }
@@ -43,9 +47,7 @@ function LiveDetails() {
                             controls={true}
                             playing
                             width="100%"
-                            // playIcon={<img width="10%" alt="play" src={`${IMG_URL}/uploads/play.png`} />}
                             url={`https://www.youtube.com/watch?v=${liveData?.yt_url}`}
-                            // light={`${IMG_URL}/${liveData?.image}`}
                             config={{
                                 file: {
                                     attributes: {
@@ -67,8 +69,43 @@ function LiveDetails() {
                             
 
                         </div>
+                        <div className="theater-details-info">
+                            {/* <div className="theater-details-info-single">
+                                <h4>Date</h4>
+                                <p>{new Date()}</p>
+                            </div> */}
+                           <div className="theater-details-info-single">
+                                <h4>Language</h4>
+                                <p>{liveData?.language}</p>
+                            </div>
+
+                        </div>
                          <div className="live-details-subDetails">
                             <p>{liveData.details}</p>
+                        </div>
+                        
+                        <div className="video-details-more-video">
+                            <h2>Similar Channels</h2>
+                            <div className="video-details-more-video-wrapper">
+                                <Grid container spacing={3}>
+
+                                    {
+                                        relatedData?.map((data, index) =>
+                                            <Grid key={index} item lg={2} md={3} sm={4} xs={6} >
+                                                <div key={index} className="video-details-more-video-cart">
+                                                    <span onClick={() => { history.push(`/live/${data.live_id}`) }}>
+                                                        <img alt="" style={{ maxWidth: "100%" }} src={`${IMG_URL}/${data?.image}`} />
+                                                        <h3>{data?.title}</h3>
+                                                    </span>
+                                                </div>
+                                            </Grid>
+
+                                        )
+                                    }
+                                </Grid>
+
+                            </div>
+
                         </div>
                      </div>
                 </>
