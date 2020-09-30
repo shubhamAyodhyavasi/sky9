@@ -43,6 +43,7 @@ function LiveDetails() {
 
 
                     <div className="live-player-wrapper">
+                        
                         <ReactPlayer
                             controls={true}
                             playing
@@ -70,10 +71,7 @@ function LiveDetails() {
 
                         </div>
                         <div className="theater-details-info">
-                            {/* <div className="theater-details-info-single">
-                                <h4>Date</h4>
-                                <p>{new Date()}</p>
-                            </div> */}
+                            
                            <div className="theater-details-info-single">
                                 <h4>Language</h4>
                                 <p>{liveData?.language}</p>

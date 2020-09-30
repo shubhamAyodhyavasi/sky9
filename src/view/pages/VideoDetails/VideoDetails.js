@@ -4,6 +4,7 @@ import { getDaynamicPostData, getUserData } from '../../../services/services'
 import Layout from '../../element/Layout'
 import ReactPlayer from 'react-player/lazy'
 import Skeleton from '@material-ui/lab/Skeleton';
+import { useHistory} from 'react-router-dom'
 import "./VideoDetails.css"
 import config from '../../../constants/config'
 import { Button, Snackbar, Grid } from '@material-ui/core';
@@ -12,6 +13,7 @@ import { Alert } from '@material-ui/lab';
 const IMG_URL = config.IMG_URL
 
 function VideoDetails() {
+    const history = useHistory();
     const [albumData, setAlbumData] = useState([])
     const [videoData, setVideoData] = useState([])
     const [skeletonView, setSkeletonView] = useState(true)
@@ -44,6 +46,13 @@ function VideoDetails() {
         }
         setOpen({ action: false, msg: '', type: 'success' });
     };
+    const showVideo = () =>{
+        
+        if(videoData?.canLoginUserView == 1){
+           return getUserData();
+        }
+        return true
+    }
     return (
         <Layout >
             {skeletonView &&
@@ -58,8 +67,11 @@ function VideoDetails() {
                 albumData.length > 0 &&
                 <>
 
-
+{
+                           showVideo() ? 
                     <div className="video-player-wrapper">
+                       
+                    
                         <ReactPlayer
                             controls={true}
                             playing
@@ -67,7 +79,6 @@ function VideoDetails() {
                             playIcon={<img width="10%" alt="play" src={`${IMG_URL}/uploads/play.png`} />}
 
                             url={videoData?.video_link ? `${IMG_URL}/${videoData?.video_link}` : "https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"}
-                            // url="https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"
                             light={`${IMG_URL}/${videoData?.image}`}
                             config={{
                                 file: {
@@ -84,12 +95,22 @@ function VideoDetails() {
                                 }
                             }}
                         />
+                        
                     </div>
+                    :
+                    <div className="video-player-error-wrapper">
+                        <h3>Login to continue enjoying uninterrupted video and personalised experience.</h3>
+                        <Button type="butotn" onClick={()=>{history.push(`/login`)}} variant="outlined" color="default">
+                            Login
+                        </Button>
+                     </div>
+                    }
                     <div className="video-details-wrapper">
                         <div className="video-details-title">
                             <div>
                                 <h2>{albumData[0].title}</h2>
                                 <h3>{albumData[0].sub_cat_dt?.title}</h3>
+                                 
                             </div>
                             <div>
                                 {

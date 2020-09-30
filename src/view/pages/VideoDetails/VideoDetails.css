@@ -58,3 +58,7 @@ video:focus {
         height: 100% !important;
     }
 }
+
+.video-player-error-wrapper {
+    text-align: center;
+}
