@@ -137,7 +137,7 @@ function Header({ menus }) {
                 <li className="navigation-menu__item"  >
                   <Button onClick={() => {
                     history.push(`/theaters`)
-                  }} className="navigation-menu__link" >Theater</Button>
+                  }} className="navigation-menu__link" >Ticket</Button>
                 </li>
               </ul>
             </div>

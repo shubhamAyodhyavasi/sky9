@@ -1,11 +1,15 @@
+@import '../../../styles/colors';
+
 .live-details-wrapper {
     margin-top: 30px;
 }
 .live-details-title {
-    border-bottom: 4px solid #808080e0;
+    // border-bottom: 4px solid #808080e0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    @include goldLine;
 }
 .live-details-info {
     margin-top: 30px;

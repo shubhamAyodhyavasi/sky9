@@ -59,15 +59,16 @@ function Live() {
                                            <h3>{item?.cat?.title}</h3>
                                         </div>
                                         <div className="live-list-single-list">
-                                        {
-                                            item?.live?.map((item2, key2) => (
-                                              
-                                                <Grid key={key2} item lg={2} md={3} sm={3} xs={3} >
-                                                    <LiveCart isSmall={true} albumDetails={convertIntoFormat(item2)} />
-                                                    
-                                                </Grid>
-                                            ))
-                                        }
+                                            {
+                                                item?.live?.map((item2, key2) => (
+                                                
+                                                        <LiveCart isSmall={true} albumDetails={convertIntoFormat(item2)} />
+                                                    // <Grid key={key2} item lg={2} md={3} sm={3} xs={3} >
+                                                    //     <LiveCart isSmall={true} albumDetails={convertIntoFormat(item2)} />
+                                                        
+                                                    // </Grid>
+                                                ))
+                                            }
                                         </div>
                                         
                                                

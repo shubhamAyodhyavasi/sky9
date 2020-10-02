@@ -2,13 +2,23 @@
 .live-cart-wrapper {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
-    background: #ffffff;
-    box-shadow: 0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12);
     margin-bottom: 25px;
     border-radius: 5px;
     position: relative;
     background-size: cover;
+    flex: 0 0 20%;
+    @media screen and (max-width: 1600px){
+        flex: 0 0 25%;
+    }
+    @media screen and (max-width: 1200px){
+        flex: 0 0 33.333%;
+    }
+    @media screen and (max-width: 900px){
+        flex: 0 0 50%;
+    }
+    @media screen and (max-width: 700px){
+        flex: 0 0 100%;
+    }
     &:hover{
         &:after {
             height: 100%;
@@ -17,43 +27,59 @@
     }
 
     
-    & > * {
-        position: absolute;
-        z-index: 3;
-    }
-    &__bg {
-        position: absolute;
-        width: 100%;
-        height: 100%;
+    // & > * {
+    //     position: absolute;
+    //     z-index: 3;
+    // }
+    // &__bg {
+    //     position: absolute;
+    //     width: 100%;
+    //     height: 100%;
+    //     object-fit: cover;
+    //     left: 0;
+    //     right: 0;
+    //     top: 0;
+    //     z-index: 1;
+    //     bottom: 0;
+    // }
+    // &:before {
+    //     width: 100%;
+    //     padding-top: 130%;
+    //     content: "";
+    //     display: block;
+    //     // @media screen and (max-width: 800px){
+    //     //     padding-top: 70%;
+    //     // }
+    // }
+    // &:after {
+    //     z-index: 0;
+    //     position: absolute;
+    //     height: 50%;
+    //     width: 100%;
+    //     background: linear-gradient(0deg, rgba(0,0,0, 0.67) 0%, transparent 100%);
+    //     content: '';
+    //     bottom: 0;
+    // }
+    // &--small{
+    //     &:before {
+    //         padding-top: 70%;
+    //     }
+    // }
+    &__thumb{
+        width: 100px;
+        height: 100px;
         object-fit: cover;
-        left: 0;
-        right: 0;
-        top: 0;
-        z-index: 1;
-        bottom: 0;
+        border-radius: 100%;
+        border: 2px solid white;
     }
-    &:before {
-        width: 100%;
-        padding-top: 130%;
-        content: "";
-        display: block;
-        // @media screen and (max-width: 800px){
-        //     padding-top: 70%;
-        // }
+    &__body{
+        padding-left: 30px; 
+        padding-right: 15px; 
     }
-    &:after {
-        z-index: 0;
-        position: absolute;
-        height: 50%;
-        width: 100%;
-        background: linear-gradient(0deg, rgba(0,0,0, 0.67) 0%, transparent 100%);
-        content: '';
-        bottom: 0;
-    }
-    &--small{
-        &:before {
-            padding-top: 70%;
-        }
+    &__title {
+        font-weight: 500;
+        letter-spacing: .2px;
+        font-size: 16px;
     }
 }
 

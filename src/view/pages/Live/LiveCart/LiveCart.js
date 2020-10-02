@@ -9,12 +9,21 @@ export default function LiveCart({ albumDetails, isSmall }) {
     const history = useHistory();
     return (
         <div className={`live-cart-wrapper ${isSmall ? "live-cart-wrapper--small" : ""}`} 
-        style={{
-            backgroundImage: `url(${img})`,
-        }}>
-            {totalView}
-            <img className="live-cart-wrapper__bg" alt={title} src={img} />
-            <div className="live-cart-wrapper-footer">
+        // style={{
+        //     backgroundImage: `url(${img})`,
+        // }}
+        >
+            <div onClick={()=>{
+                        history.push(`/live/${id}`)
+                    }} className="live-cart-wrapper__image-wrap">
+                <img src={img} class="live-cart-wrapper__thumb" alt=""/>
+                {/* {totalView} */}
+            </div>
+            {/* <img className="live-cart-wrapper__bg" alt={title} src={img} /> */}
+            <div className="live-cart-wrapper__body">
+                <p onClick={()=>{
+                        history.push(`/live/${id}`)
+                    }} className="live-cart-wrapper__title">{title}</p>
                 <Button 
                     style={{
                         minWidth: '40px'

@@ -8,6 +8,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import {  Grid } from '@material-ui/core';
 import "./LiveDetails.scss"
 import config from '../../../constants/config'
+import LiveCart from '../Live/LiveCart';
 const IMG_URL = config.IMG_URL
 function LiveDetails() {
     const history = useHistory();
@@ -15,7 +16,9 @@ function LiveDetails() {
     const [relatedData, setRelatedData] = useState([])
     const [skeletonView, setSkeletonView] = useState(true)
     const { id } = useParams()
+    
     useEffect(() => {
+        window.scrollTo(0, 0)
         getData(id)
     }, [id]);
 
@@ -28,6 +31,16 @@ function LiveDetails() {
         
     }
    
+    const convertIntoFormat = (itm) => {
+        console.log('xx',{itm})
+        const newdata = {
+            ...itm,
+            title: itm.title,
+            id: itm.live_id,
+            img: `${IMG_URL}/${itm?.image}`,
+        }
+        return newdata
+    }
     return (
         <Layout >
             {skeletonView &&
@@ -85,7 +98,22 @@ function LiveDetails() {
                         <div className="video-details-more-video">
                             <h2>Similar Channels</h2>
                             <div className="video-details-more-video-wrapper">
-                                <Grid container spacing={3}>
+                                <div className="live-list-single-list">
+                                    {
+                                        relatedData?.map((data, index) => <LiveCart isSmall={true} albumDetails={convertIntoFormat(data)} />
+                                            // <Grid key={index} item lg={2} md={3} sm={4} xs={6} >
+                                            //     <div key={index} className="video-details-more-video-cart">
+                                            //         <span onClick={() => { history.push(`/live/${data.live_id}`) }}>
+                                            //             <img alt="" style={{ maxWidth: "100%" }} src={`${IMG_URL}/${data?.image}`} />
+                                            //             <h3>{data?.title}</h3>
+                                            //         </span>
+                                            //     </div>
+                                            // </Grid>
+
+                                        )
+                                    }
+                                </div>
+                                {/* <Grid container spacing={3}>
 
                                     {
                                         relatedData?.map((data, index) =>
@@ -100,7 +128,7 @@ function LiveDetails() {
 
                                         )
                                     }
-                                </Grid>
+                                </Grid> */}
 
                             </div>
 

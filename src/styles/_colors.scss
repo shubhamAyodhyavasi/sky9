@@ -1,0 +1,10 @@
+$goldGradient: linear-gradient(45deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+@mixin goldLine {
+    &:after{
+        content: "";
+        display: block;
+        height: 2px;
+        width: 100%;
+        background: $goldGradient;
+    }
+}
