@@ -270,6 +270,13 @@ function Header({ menus }) {
                   width: "100%"
                 }} >
                   <ListItem button onClick={() => {
+                    history.push(`/wallet`)
+                  }} >
+
+                    <ListItemText primary={"Wallet"} />
+                  </ListItem>
+                  <Divider />
+                  <ListItem button onClick={() => {
                     history.push(`/saved-video`)
                   }} >
 

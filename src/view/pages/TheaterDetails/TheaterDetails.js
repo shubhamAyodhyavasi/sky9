@@ -13,6 +13,7 @@ const IMG_URL = config.IMG_URL
 
 function TheaterDetails() {
     const [albumData, setAlbumData] = useState(false)
+    const [userHaveAccess, setUserHaveAccess] = useState({})
     const [videoData, setVideoData] = useState(null)
     const [skeletonView, setSkeletonView] = useState(true)
     const [open, setOpen] = useState({ action: false, msg: '', type: false });
@@ -23,19 +24,36 @@ function TheaterDetails() {
 
     const getData = async (id) => {
         if (!id) return
-        const response = await getDaynamicPostData('getSingleTheaterVideo', { video_id: id })
-        setAlbumData( false )
+        const response = await getDaynamicPostData('getSingleTheaterVideo', { video_id: id, user_id: getUserData().user_id })
+        setAlbumData(false)
         setVideoData(response?.records)
         setSkeletonView(false)
+
+        const responseAccess = await getDaynamicPostData('isUserCanViewTicketVideo', { video_id: id,user_id: getUserData().user_id })
+        setUserHaveAccess(responseAccess)
     }
-   
+    const getThisTicket = async () => {
+        const response = await getDaynamicPostData('add_ticket_after_payment_success', { 
+             video_id: id, 
+             user_id: getUserData().user_id,
+             order_ammount_type: '1' ,
+             transaction_id:'',
+             ammount:videoData?.price,
+            })
+            setOpen({ action: true, msg: response?.message, type: response?.status ? 'success':'' });
+            if(response?.status){
+                const responseAccess = await getDaynamicPostData('isUserCanViewTicketVideo', { video_id: id,user_id: getUserData().user_id })
+            setUserHaveAccess(responseAccess)
+            }
+            
+    }
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
         setOpen({ action: false, msg: '', type: 'success' });
     };
-  
+
     return (
         <Layout >
             {skeletonView &&
@@ -50,28 +68,40 @@ function TheaterDetails() {
                 videoData && !skeletonView &&
                 <>
 
+                    {
+                        !userHaveAccess.status && albumData ?
+                            <div className="video-player-error-wrapper">
+                                <h3>{userHaveAccess?.message}</h3>
+                                <Button type="butotn" onClick={getThisTicket} variant="outlined" color="default">
+                                    Buy Now
+                            </Button>
+                            </div>
+                            :
+                            <div className="theater-player-wrapper">
 
-                    <div className="theater-player-wrapper">
-                        <ReactPlayer
-                            controls={true}
-                            playing
-                            width="100%"
-                            playIcon={<img width="10%" alt="play" src={`${IMG_URL}/uploads/play.png`} />}
-                            url={albumData ? `${IMG_URL}/${videoData?.video_link}`  : `${IMG_URL}/${videoData?.trailer_url}`}
-                            light={`${IMG_URL}/${videoData?.image}`}
-                            config={{
-                                file: {
-                                    attributes: {
-                                        crossOrigin: 'true',
-                                        controlsList: 'nodownload'
-                                    },
+                                <ReactPlayer
+                                    controls={true}
+                                    playing
+                                    width="100%"
+                                    playIcon={<img width="10%" alt="play" src={`${IMG_URL}/uploads/play.png`} />}
+                                    url={albumData ? `${IMG_URL}/${videoData?.video_link}` : `${IMG_URL}/${videoData?.trailer_url}`}
+                                    light={`${IMG_URL}/${videoData?.image}`}
+                                    config={{
+                                        file: {
+                                            attributes: {
+                                                crossOrigin: 'true',
+                                                controlsList: 'nodownload'
+                                            },
 
-                                    nodownload: true,
-                                    
-                                }
-                            }}
-                        />
-                    </div>
+                                            nodownload: true,
+
+                                        }
+                                    }}
+                                />
+
+
+                            </div>
+                    }
                     <div className="theater-details-wrapper">
                         <div className="theater-details-title">
                             <div>
@@ -79,7 +109,7 @@ function TheaterDetails() {
                                 <h3>{videoData.subDetails}</h3>
                             </div>
                             <div>
-                                
+
 
                             </div>
 
@@ -107,25 +137,25 @@ function TheaterDetails() {
                             <div className="theater-details-more-video-wrapper">
                                 <Grid container spacing={3}>
 
-                                            <Grid  item lg={2} md={3} sm={4} xs={6} >
-                                                <div  className="video-details-more-video-cart">
-                                                    <span onClick={() => { setAlbumData(true) }}>
-                                                        <img alt="" style={{ maxWidth: "100%" }} src={`${IMG_URL}/${videoData?.image}`} />
-                                                        <h3>{videoData?.title} (Movie)</h3>
-                                                    </span>
-                                                </div>
-                                                
-                                            </Grid>
-                                            <Grid  item lg={2} md={3} sm={4} xs={6} >
-                                            <div  className="video-details-more-video-cart">
-                                                    <span onClick={() => { setAlbumData(false) }}>
-                                                        <img alt="" style={{ maxWidth: "100%" }} src={`${IMG_URL}/${videoData?.image}`} />
-                                                        <h3>{videoData?.title} (Trailer)</h3>
-                                                    </span>
-                                                </div>
-                                            </Grid>
-                                 </Grid>
-                             </div>
+                                    <Grid item lg={2} md={3} sm={4} xs={6} >
+                                        <div className="video-details-more-video-cart">
+                                            <span onClick={() => { setAlbumData(true) }}>
+                                                <img alt="" style={{ maxWidth: "100%" }} src={`${IMG_URL}/${videoData?.image}`} />
+                                                <h3>{videoData?.title} (Movie)</h3>
+                                            </span>
+                                        </div>
+
+                                    </Grid>
+                                    <Grid item lg={2} md={3} sm={4} xs={6} >
+                                        <div className="video-details-more-video-cart">
+                                            <span onClick={() => { setAlbumData(false) }}>
+                                                <img alt="" style={{ maxWidth: "100%" }} src={`${IMG_URL}/${videoData?.image}`} />
+                                                <h3>{videoData?.title} (Trailer)</h3>
+                                            </span>
+                                        </div>
+                                    </Grid>
+                                </Grid>
+                            </div>
 
                         </div>
                     </div>

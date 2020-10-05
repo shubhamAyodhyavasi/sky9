@@ -4,3 +4,16 @@
     margin-top: 20px;
     justify-content: center;
 }
+.membership-gird-confirmation-wrapper {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+}
+
+.membership-gird-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0px;
+}

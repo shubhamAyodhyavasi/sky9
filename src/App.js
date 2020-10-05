@@ -15,6 +15,7 @@ import Membership from './view/pages/Membership'
 import Live from './view/pages/Live'
 import LiveDetails from './view/pages/LiveDetails'
 import Theater from './view/pages/Theater'
+import Wallet from './view/pages/Wallet'
 import TheaterDetails from './view/pages/TheaterDetails'
 import ChangedPassword from './view/pages/ChangedPassword'
 import './App.scss';
@@ -101,6 +102,11 @@ function App({setMenus}) {
             path="/change-password"
             component={_props => <ChangedPassword {..._props} />}
           />
+          <Route
+            path="/wallet"
+            component={_props => <Wallet {..._props} />}
+          />
+          
           
       </Switch>
     </div>

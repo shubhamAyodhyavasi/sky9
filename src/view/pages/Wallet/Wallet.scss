@@ -1,0 +1,26 @@
+.wallet-form-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    width: 470px;
+    max-width: 100%;
+    margin: auto;
+    padding: 20px;
+    background: rgba(255,255,255,.03);
+    box-shadow: 0px 0px 30px rgba(0,0,0,.1);
+    .form-field-form{
+        width: 100%;
+    }
+}
+.wallet-field-wrapper {
+    margin-top: 20px;
+    margin-bottom: 35px;
+}
+.wallet-footer-links {
+    margin-top: 25px;
+}
+.wallet-field-button {
+    padding: 10px 0px;
+}

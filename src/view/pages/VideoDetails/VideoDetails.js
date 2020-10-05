@@ -53,6 +53,15 @@ function VideoDetails() {
         }
         return true
     }
+    const addCoinAfterVideoEnd = async () =>{
+        if(getUserData()){
+            const video_id = videoData?.video_id
+            const user_id = getUserData().user_id
+            const response = await getDaynamicPostData('add_coin_after_video_view', { video_id, user_id})
+            setOpen({ action: true, msg: response?.message, type: response?.status ? 'success' : '' });
+        }
+        
+    }
     return (
         <Layout >
             {skeletonView &&
@@ -77,7 +86,7 @@ function VideoDetails() {
                             playing
                             width="100%"
                             playIcon={<img width="10%" alt="play" src={`${IMG_URL}/uploads/play.png`} />}
-
+                            onEnded={addCoinAfterVideoEnd}
                             url={videoData?.video_link ? `${IMG_URL}/${videoData?.video_link}` : "https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"}
                             light={`${IMG_URL}/${videoData?.image}`}
                             config={{

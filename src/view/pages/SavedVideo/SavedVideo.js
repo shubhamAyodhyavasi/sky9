@@ -27,8 +27,8 @@ function SavedVideo() {
     const convertIntoFormat = (itm) => {
         
         const newdata = {
-            title: itm[0].title,
-            id: itm[0].album_id,
+            title: itm[0]?.title,
+            id: itm[0]?.album_id,
             img: `${IMG_URL}/${itm[0]?.image}`,
         }
      
