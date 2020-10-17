@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom'
 import { getDaynamicPostData, getUserData } from '../../../services/services'
 import Layout from '../../element/Layout'
 import ReactPlayer from 'react-player/lazy'
 import Skeleton from '@material-ui/lab/Skeleton';
-import { useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import "./VideoDetails.css"
 import config from '../../../constants/config'
 import { Button, Snackbar, Grid } from '@material-ui/core';
@@ -13,9 +13,12 @@ import { Alert } from '@material-ui/lab';
 const IMG_URL = config.IMG_URL
 
 function VideoDetails() {
+    const mainVideoref = useRef(null)
     const history = useHistory();
     const [albumData, setAlbumData] = useState([])
     const [videoData, setVideoData] = useState([])
+    const [playing, setPlaying] = useState(false)
+    const [showAds, setShowAds] = useState(false)
     const [skeletonView, setSkeletonView] = useState(true)
     const [open, setOpen] = useState({ action: false, msg: '', type: false });
     const { id } = useParams()
@@ -26,9 +29,10 @@ function VideoDetails() {
     const getData = async (id) => {
         if (!id) return
         const response = await getDaynamicPostData('getVideoByalbumeId', { album_id: id })
+        adsHandler(response?.records && response?.records.length && response?.records[0])
         setAlbumData(response?.records && response?.records.length && response?.records)
-        setVideoData(response?.records && response?.records.length && response?.records[0])
         setSkeletonView(false)
+
     }
     const addVideoInFavList = async (albumData) => {
         const userData = getUserData()
@@ -46,22 +50,50 @@ function VideoDetails() {
         }
         setOpen({ action: false, msg: '', type: 'success' });
     };
-    const showVideo = () =>{
-        
-        if(videoData?.canLoginUserView == 1){
-           return getUserData();
+    const showVideo = () => {
+
+        if (videoData?.canLoginUserView == 1) {
+            return getUserData();
         }
         return true
     }
-    const addCoinAfterVideoEnd = async () =>{
-        if(getUserData()){
+
+    const adsHandler = (record) => {
+        const advertise_time = record?.album_dt?.advertise_time
+        if (advertise_time == 0) {
+            // play advartise then video autoplay
+            // check ads video availablity
+            record.video_add.length > 0 && setShowAds(true)
+
+        }
+        setVideoData(record)
+
+    }
+    const addCoinAfterVideoEnd = async () => {
+        if (getUserData()) {
             const video_id = videoData?.video_id
             const user_id = getUserData().user_id
-            const response = await getDaynamicPostData('add_coin_after_video_view', { video_id, user_id})
+            const response = await getDaynamicPostData('add_coin_after_video_view', { video_id, user_id })
             setOpen({ action: true, msg: response?.message, type: response?.status ? 'success' : '' });
         }
-        
+
     }
+    const playMainVideoOnFinishAds = () => {
+        setShowAds(false)
+        setPlaying(true)
+    }
+    const stopMainVideoAndPlayAds = (e) => {
+        if (parseInt(e.playedSeconds) === 5) {
+            setShowAds(true)
+            setPlaying(false)
+        }
+
+
+    }
+
+    const mainVideoClasses = showAds ? 'video-player-wrapper display-hide' : 'video-player-wrapper display-show'
+    const adsVideoClasses = showAds ? 'video-ads-wrapper display-show' : 'video-ads-wrapper display-hide'
+    console.log(mainVideoref.current, mainVideoref?.current?.props)
     return (
         <Layout >
             {skeletonView &&
@@ -76,50 +108,77 @@ function VideoDetails() {
                 albumData.length > 0 &&
                 <>
 
-{
-                           showVideo() ? 
-                    <div className="video-player-wrapper">
-                       
-                    
-                        <ReactPlayer
-                            controls={true}
-                            playing
-                            width="100%"
-                            playIcon={<img width="10%" alt="play" src={`${IMG_URL}/uploads/play.png`} />}
-                            onEnded={addCoinAfterVideoEnd}
-                            url={videoData?.video_link ? `${IMG_URL}/${videoData?.video_link}` : "https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"}
-                            light={`${IMG_URL}/${videoData?.image}`}
-                            config={{
-                                file: {
-                                    attributes: {
-                                        crossOrigin: 'true',
-                                        controlsList: 'nodownload'
-                                    },
+                    {
+                        showVideo() ?
+                            <div className={mainVideoClasses}>
 
-                                    nodownload: true,
-                                    // tracks: [
-                                    //     { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'en', default: true },
-                                    //     { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'hi' }
-                                    // ]
-                                }
-                            }}
-                        />
-                        
-                    </div>
-                    :
-                    <div className="video-player-error-wrapper">
-                        <h3>Login to continue enjoying uninterrupted video and personalised experience.</h3>
-                        <Button type="butotn" onClick={()=>{history.push(`/login`)}} variant="outlined" color="default">
-                            Login
+
+                                <ReactPlayer
+
+                                    ref={mainVideoref}
+                                    controls={true}
+                                    playing={playing}
+                                    width="100%"
+                                    //playIcon={<img width="10%" alt="play" src={`${IMG_URL}/uploads/play.png`} />}
+                                    onEnded={addCoinAfterVideoEnd}
+                                    url={videoData?.video_link ? `${IMG_URL}/${videoData?.video_link}` : "https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"}
+                                    //  light={`${IMG_URL}/${videoData?.image}`}
+                                    onProgress={(e) => { stopMainVideoAndPlayAds(e) }}
+                                    config={{
+                                        file: {
+                                            attributes: {
+                                                crossOrigin: 'true',
+                                                controlsList: 'nodownload'
+                                            },
+
+                                            nodownload: true,
+                                            // tracks: [
+                                            //     { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'en', default: true },
+                                            //     { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'hi' }
+                                            // ]
+                                        }
+                                    }}
+                                />
+
+                            </div>
+                            :
+                            <div className="video-player-error-wrapper">
+                                <h3>Login to continue enjoying uninterrupted video and personalised experience.</h3>
+                                <Button type="butotn" onClick={() => { history.push(`/login`) }} variant="outlined" color="default">
+                                    Login
                         </Button>
-                     </div>
+                            </div>
                     }
+                    {
+                        showAds &&
+                        <div className={adsVideoClasses}>
+                            <ReactPlayer
+                                controls={false}
+                                playing={true}
+                                width="100%"
+                                onEnded={playMainVideoOnFinishAds}
+                                url="https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"
+                                config={{
+                                    file: {
+                                        attributes: {
+                                            crossOrigin: 'true',
+                                            controlsList: 'nodownload'
+                                        },
+
+                                        nodownload: true,
+
+                                    }
+                                }}
+                            />
+                        </div>
+                    }
+
                     <div className="video-details-wrapper">
                         <div className="video-details-title">
                             <div>
                                 <h2>{albumData[0].title}</h2>
                                 <h3>{albumData[0].sub_cat_dt?.title}</h3>
-                                 
+
                             </div>
                             <div>
                                 {
