@@ -83,17 +83,17 @@ function VideoDetails() {
         setPlaying(true)
     }
     const stopMainVideoAndPlayAds = (e) => {
-        if (parseInt(e.playedSeconds) === 5) {
-            setShowAds(true)
+        const advertise_time = videoData?.album_dt?.advertise_time
+        if (advertise_time > 0 &&  parseInt(e.playedSeconds) == advertise_time ) {
             setPlaying(false)
+            setShowAds(true)
         }
 
 
     }
 
-    const mainVideoClasses = showAds ? 'video-player-wrapper display-hide' : 'video-player-wrapper display-show'
-    const adsVideoClasses = showAds ? 'video-ads-wrapper display-show' : 'video-ads-wrapper display-hide'
-    console.log(mainVideoref.current, mainVideoref?.current?.props)
+    const mainVideoClasses =  showAds ? 'video-player-wrapper display-hide' : 'video-player-wrapper display-show'
+    const adsVideoClasses =  showAds ? 'video-ads-wrapper display-show' : 'video-ads-wrapper display-hide'
     return (
         <Layout >
             {skeletonView &&
@@ -112,17 +112,22 @@ function VideoDetails() {
                         showVideo() ?
                             <div className={mainVideoClasses}>
 
-
+                                {
+                                    playing ? "playign" : "not"
+                                }
                                 <ReactPlayer
 
                                     ref={mainVideoref}
                                     controls={true}
                                     playing={playing}
                                     width="100%"
-                                    //playIcon={<img width="10%" alt="play" src={`${IMG_URL}/uploads/play.png`} />}
+                                    onPlay={()=> {
+                                        setPlaying(true)
+                                    }}
+                                    playIcon={<img width="10%" alt="play" src={`${IMG_URL}/uploads/play.png`} />}
                                     onEnded={addCoinAfterVideoEnd}
                                     url={videoData?.video_link ? `${IMG_URL}/${videoData?.video_link}` : "https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"}
-                                    //  light={`${IMG_URL}/${videoData?.image}`}
+                                    light={`${IMG_URL}/${videoData?.image}`}
                                     onProgress={(e) => { stopMainVideoAndPlayAds(e) }}
                                     config={{
                                         file: {
@@ -178,7 +183,7 @@ function VideoDetails() {
                             <div>
                                 <h2>{albumData[0].title}</h2>
                                 <h3>{albumData[0].sub_cat_dt?.title}</h3>
-
+                               <Button onClick={()=>{setPlaying(!playing)}} >play push</Button>
                             </div>
                             <div>
                                 {
