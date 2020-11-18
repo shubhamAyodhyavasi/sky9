@@ -69,7 +69,18 @@ function TheaterDetails() {
                 <>
 
                     {
-                        !userHaveAccess.status && albumData ?
+                        true ? (
+                            <div style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                height: '80vh',
+                            }} >
+                                <h2>
+                                    Coming soon
+                                </h2>
+                            </div>
+                        ) : (!userHaveAccess.status && albumData ?
                             <div className="video-player-error-wrapper">
                                 <h3>{userHaveAccess?.message}</h3>
                                 <Button type="butotn" onClick={getThisTicket} variant="outlined" color="default">
@@ -100,7 +111,7 @@ function TheaterDetails() {
                                 />
 
 
-                            </div>
+                            </div>)
                     }
                     <div className="theater-details-wrapper">
                         <div className="theater-details-title">
