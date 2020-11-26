@@ -25,20 +25,29 @@ export default function Membership() {
     const [singleMembership, setSingleMembership] = useState({})
     const [apiData, setApiData] = useState({})
     useEffect(() => {
-        getDaynamicPostData('getMembership', {})
-            .then(setGetMembership)
+        const user_id = getUserData()?.user_id
+        if (user_id) {
+            getDaynamicPostData('getMembership', { user_id: user_id })
+                .then(setGetMembership)
+        } else {
+            getDaynamicPostData('getMembership', {})
+                .then(setGetMembership)
+        }
+
     }, []);
     const addMembership = () => {
         const { mem_id } = singleMembership
         const user_id = getUserData().user_id
         getDaynamicPostData('updateMembershipUsingCoin', { user_id: user_id, mem_id: mem_id })
             .then(setApiData)
-       
+
     }
-    const setDefault = () =>{
+    const setDefault = () => {
         setSingleMembership({})
         setApiData({})
     }
+    const currentMembershipInfo = getMembership?.current_membership_info
+    console.log(currentMembershipInfo)
     return (
         <Layout >
             {
@@ -47,48 +56,48 @@ export default function Membership() {
                         apiData && <div>
                             <Typography gutterBottom variant="body2" component="p" color="secondary" alignt="center">
                                 {apiData.message}
-                                </Typography>
+                            </Typography>
                             <Divider />
-                            
+
                         </div>
                     }
-                   
+
                     <h3>Are you sure for get "{singleMembership?.title}" membership </h3>
                     <h3>Price : {singleMembership?.price} Rs.</h3>
                     <h3>Days : {singleMembership?.limitDays} </h3>
                     <Divider />
                     {
-                            apiData?.status ? 
+                        apiData?.status ?
                             <div className="membership-gird-buttons">
-                        
-                             <Button type="button" variant="outlined" onClick={() => { setDefault() }} color="danger" color="secondary">
-                                Cancel
+
+                                <Button type="button" variant="outlined" onClick={() => { setDefault() }} color="danger" color="secondary">
+                                    Cancel
                             </Button>
-                        </div>
+                            </div>
                             :
                             <div className="membership-gird-buttons">
-                        
-                            <Button type="button" variant="outlined" onClick={() => { addMembership() }} color="default">
-                                Order
+
+                                <Button type="button" variant="outlined" onClick={() => { addMembership() }} color="default">
+                                    Order
                             </Button>
-                            <Button type="button" variant="outlined" onClick={() => { setDefault() }} color="danger" color="secondary">
-                                Cancel 
+                                <Button type="button" variant="outlined" onClick={() => { setDefault() }} color="danger" color="secondary">
+                                    Cancel
                             </Button>
-                        </div>
-                        }
-                   
+                            </div>
+                    }
+
                     <Divider />
                 </div>
                     :
                     <div className="membership-gird-wrapper">
-                    {    apiData && <div>
+                        {apiData && <div>
                             <Typography gutterBottom variant="body2" component="p" color="secondary" alignt="center">
                                 {apiData.message}
-                                </Typography>
+                            </Typography>
                             <Divider />
-                            
+
                         </div>
-            }
+                        }
                         {
                             getMembership?.records?.map((itm, index) =>
                                 <Card className={classes.root} key={index}>
@@ -101,7 +110,7 @@ export default function Membership() {
                                         <CardContent>
                                             <Typography gutterBottom variant="h5" alignt="align" component="h2">
                                                 {itm?.title}
-                                            </Typography>
+                                                </Typography>
                                             <Divider />
                                             <Typography gutterBottom variant="body2" component="p" alignt="align">
                                                 {itm?.price} Rs.
@@ -120,9 +129,17 @@ export default function Membership() {
                                     </CardActionArea>
                                     <CardActions>
                                         <Divider />
-                                        <Button size="small" onClick={() => { setSingleMembership(itm) }} color="secondary">
-                                            Get Membership
+                                        {
+                                            currentMembershipInfo?.length > 0 && currentMembershipInfo[0].memberShipId === itm.mem_id ?
+                                                <Button size="small" color="secondary">
+                                                    Active ( Expire On {currentMembershipInfo[0].endDate} )
                                  </Button>
+                                                :
+                                                <Button size="small" onClick={() => { setSingleMembership(itm) }} color="secondary">
+                                                    Get Membership
+                                 </Button>
+                                        }
+
                                         <Button size="small" color="primary">
 
                                         </Button>

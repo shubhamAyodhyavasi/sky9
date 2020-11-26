@@ -16,6 +16,7 @@ function VideoDetails() {
     const mainVideoref = useRef(null)
     const history = useHistory();
     const [albumData, setAlbumData] = useState([])
+    const [membershipView, setMembershipView] = useState({})
     const [videoData, setVideoData] = useState([])
     const [playing, setPlaying] = useState(false)
     const [showAds, setShowAds] = useState(false)
@@ -28,9 +29,23 @@ function VideoDetails() {
 
     const getData = async (id) => {
         if (!id) return
-        const response = await getDaynamicPostData('getVideoByalbumeId', { album_id: id })
+        const userData = getUserData().user_id
+        let param = {
+            album_id: id
+        }
+        if (userData) {
+            param = {
+                album_id: id,
+                user_id: userData
+            }
+
+        }
+        const response = await getDaynamicPostData('getVideoByalbumeId', param)
         adsHandler(response?.records && response?.records.length && response?.records[0])
         setAlbumData(response?.records && response?.records.length && response?.records)
+        if (userData) {
+            setMembershipView(response)
+        }
         setSkeletonView(false)
 
     }
@@ -60,12 +75,12 @@ function VideoDetails() {
 
     const adsHandler = (record) => {
         const advertise_time = record?.album_dt?.advertise_time
-        if (advertise_time == 0) {
-            // play advartise then video autoplay
-            // check ads video availablity
-            record.video_add.length > 0 && setShowAds(true)
+        // if (advertise_time == 0) {
+        //     // play advartise then video autoplay
+        //     // check ads video availablity
+        //     record.video_add.length > 0 && setShowAds(true)
 
-        }
+        // }
         setVideoData(record)
 
     }
@@ -78,22 +93,37 @@ function VideoDetails() {
         }
 
     }
-    const playMainVideoOnFinishAds = () => {
-        setShowAds(false)
-        setPlaying(true)
-    }
-    const stopMainVideoAndPlayAds = (e) => {
-        const advertise_time = videoData?.album_dt?.advertise_time
-        if (advertise_time > 0 &&  parseInt(e.playedSeconds) == advertise_time ) {
-            setPlaying(false)
-            setShowAds(true)
+    // const playMainVideoOnFinishAds = () => {
+    //     setShowAds(false)
+    //     setPlaying(true)
+    // }
+    //     const stopMainVideoAndPlayAds = (e) => {
+    //         const advertise_time = videoData?.album_dt?.advertise_time
+    //         if (advertise_time > 0 &&  parseInt(e.playedSeconds) == advertise_time ) {
+    //             setPlaying(false)
+    //             setShowAds(true)
+    //         }
+    //    }
+    const isPrimeVideo = () => {
+
+
+        const isActive = albumData[0].album_dt.membership_id ? true : false
+        if (isActive) {
+            console.log(albumData)
+            if (membershipView?.isMembershipActive) {
+                return true
+            } else {
+                return false
+            }
+            // code for checkmembership active
+            //membershipInfo
+            //isMembershipActive
+            //albumData.isMembershipActive
         }
-
-
+        return true
     }
-
-    const mainVideoClasses =  showAds ? 'video-player-wrapper display-hide' : 'video-player-wrapper display-show'
-    const adsVideoClasses =  showAds ? 'video-ads-wrapper display-show' : 'video-ads-wrapper display-hide'
+    const mainVideoClasses = showAds ? 'video-player-wrapper display-hide' : 'video-player-wrapper display-show'
+    const adsVideoClasses = showAds ? 'video-ads-wrapper display-show' : 'video-ads-wrapper display-hide'
     return (
         <Layout >
             {skeletonView &&
@@ -113,37 +143,46 @@ function VideoDetails() {
                             <div className={mainVideoClasses}>
 
                                 {
-                                    playing ? "playign" : "not"
+                                    isPrimeVideo() ?
+                                        <ReactPlayer
+
+                                            ref={mainVideoref}
+                                            controls={true}
+                                            playing={playing}
+                                            width="100%"
+                                            onPlay={() => {
+                                                setPlaying(true)
+                                            }}
+                                            playIcon={<img width="10%" alt="play" src={`${IMG_URL}/uploads/play.png`} />}
+                                            onEnded={addCoinAfterVideoEnd}
+                                            url={videoData?.video_link ? `${IMG_URL}/${videoData?.video_link}` : "https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"}
+                                            light={`${IMG_URL}/${videoData?.image}`}
+                                            // onProgress={(e) => { stopMainVideoAndPlayAds(e) }}
+                                            config={{
+                                                file: {
+                                                    attributes: {
+                                                        crossOrigin: 'true',
+                                                        controlsList: 'nodownload'
+                                                    },
+
+                                                    nodownload: true,
+                                                    // tracks: [
+                                                    //     { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'en', default: true },
+                                                    //     { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'hi' }
+                                                    // ]
+                                                }
+                                            }}
+                                        />
+                                        :
+                                        <div className="video-player-error-wrapper">
+                                            <h3>Subscribe to continue enjoying uninterrupted video and personalised experience.</h3>
+                                            {membershipView?.membershipInfo?.length > 0 && <h3>Your subscription expired at ({membershipView.membershipInfo[0].endDate }).</h3>}
+                                            <Button type="butotn" onClick={() => { history.push(`/membership`) }} variant="outlined" color="default">
+                                                Subscription
+                                            </Button>
+                                        </div>
                                 }
-                                <ReactPlayer
 
-                                    ref={mainVideoref}
-                                    controls={true}
-                                    playing={playing}
-                                    width="100%"
-                                    onPlay={()=> {
-                                        setPlaying(true)
-                                    }}
-                                    playIcon={<img width="10%" alt="play" src={`${IMG_URL}/uploads/play.png`} />}
-                                    onEnded={addCoinAfterVideoEnd}
-                                    url={videoData?.video_link ? `${IMG_URL}/${videoData?.video_link}` : "https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"}
-                                    light={`${IMG_URL}/${videoData?.image}`}
-                                    onProgress={(e) => { stopMainVideoAndPlayAds(e) }}
-                                    config={{
-                                        file: {
-                                            attributes: {
-                                                crossOrigin: 'true',
-                                                controlsList: 'nodownload'
-                                            },
-
-                                            nodownload: true,
-                                            // tracks: [
-                                            //     { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'en', default: true },
-                                            //     { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'hi' }
-                                            // ]
-                                        }
-                                    }}
-                                />
 
                             </div>
                             :
@@ -154,7 +193,7 @@ function VideoDetails() {
                         </Button>
                             </div>
                     }
-                    {
+                    {/* {
                         showAds &&
                         <div className={adsVideoClasses}>
                             <ReactPlayer
@@ -176,14 +215,14 @@ function VideoDetails() {
                                 }}
                             />
                         </div>
-                    }
+                    } */}
 
                     <div className="video-details-wrapper">
                         <div className="video-details-title">
                             <div>
                                 <h2>{albumData[0].title}</h2>
                                 <h3>{albumData[0].sub_cat_dt?.title}</h3>
-                               <Button onClick={()=>{setPlaying(!playing)}} >play push</Button>
+                                <Button onClick={() => { setPlaying(!playing) }} >play push</Button>
                             </div>
                             <div>
                                 {

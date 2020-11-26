@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { getDaynamicPostData, getUserData } from '../../../services/services'
 import Layout from '../../element/Layout'
 import ReactPlayer from 'react-player/lazy'
@@ -18,6 +18,7 @@ function TheaterDetails() {
     const [skeletonView, setSkeletonView] = useState(true)
     const [open, setOpen] = useState({ action: false, msg: '', type: false });
     const { id } = useParams()
+    const history = useHistory()
     useEffect(() => {
         getData(id)
     }, [id]);
@@ -28,24 +29,29 @@ function TheaterDetails() {
         setAlbumData(false)
         setVideoData(response?.records)
         setSkeletonView(false)
+        const isLogin = getUserData().user_id;
+        if (isLogin) {
+            const responseAccess = await getDaynamicPostData('isUserCanViewTicketVideo', { video_id: id, user_id: getUserData().user_id })
+            setUserHaveAccess(responseAccess)
+        } else {
+            setUserHaveAccess({ status: false, loginErrorMessage: true, message: 'Please Login for continue.' })
+        }
 
-        const responseAccess = await getDaynamicPostData('isUserCanViewTicketVideo', { video_id: id,user_id: getUserData().user_id })
-        setUserHaveAccess(responseAccess)
     }
     const getThisTicket = async () => {
-        const response = await getDaynamicPostData('add_ticket_after_payment_success', { 
-             video_id: id, 
-             user_id: getUserData().user_id,
-             order_ammount_type: '1' ,
-             transaction_id:'',
-             ammount:videoData?.price,
-            })
-            setOpen({ action: true, msg: response?.message, type: response?.status ? 'success':'' });
-            if(response?.status){
-                const responseAccess = await getDaynamicPostData('isUserCanViewTicketVideo', { video_id: id,user_id: getUserData().user_id })
+        const response = await getDaynamicPostData('add_ticket_after_payment_success', {
+            video_id: id,
+            user_id: getUserData().user_id,
+            order_ammount_type: '1',
+            transaction_id: '',
+            ammount: videoData?.price,
+        })
+        setOpen({ action: true, msg: response?.message, type: response?.status ? 'success' : '' });
+        if (response?.status) {
+            const responseAccess = await getDaynamicPostData('isUserCanViewTicketVideo', { video_id: id, user_id: getUserData().user_id })
             setUserHaveAccess(responseAccess)
-            }
-            
+        }
+
     }
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -53,7 +59,6 @@ function TheaterDetails() {
         }
         setOpen({ action: false, msg: '', type: 'success' });
     };
-
     return (
         <Layout >
             {skeletonView &&
@@ -69,23 +74,22 @@ function TheaterDetails() {
                 <>
 
                     {
-                        true ? (
-                            <div style={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                height: '80vh',
-                            }} >
-                                <h2>
-                                    Coming soon
-                                </h2>
-                            </div>
-                        ) : (!userHaveAccess.status && albumData ?
+                        !userHaveAccess.status && albumData ?
                             <div className="video-player-error-wrapper">
                                 <h3>{userHaveAccess?.message}</h3>
-                                <Button type="butotn" onClick={getThisTicket} variant="outlined" color="default">
-                                    Buy Now
+                                {
+                                    userHaveAccess?.loginErrorMessage ?
+                                        <Button type="butotn" onClick={() => {
+                                            history.push(`/login`)
+                                        }} variant="outlined" color="default">
+                                            Login
                             </Button>
+                                        :
+                                        <Button type="butotn" onClick={getThisTicket} variant="outlined" color="default">
+                                            Buy Now
+                            </Button>
+                                }
+
                             </div>
                             :
                             <div className="theater-player-wrapper">
@@ -111,7 +115,7 @@ function TheaterDetails() {
                                 />
 
 
-                            </div>)
+                            </div>
                     }
                     <div className="theater-details-wrapper">
                         <div className="theater-details-title">
