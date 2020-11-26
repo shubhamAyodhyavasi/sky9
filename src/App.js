@@ -18,6 +18,7 @@ import Theater from './view/pages/Theater'
 import Wallet from './view/pages/Wallet'
 import TheaterDetails from './view/pages/TheaterDetails'
 import ChangedPassword from './view/pages/ChangedPassword'
+import AdminRouter from './view/admin/AdminRouter'
 import './App.scss';
 import { setMenus } from './services/redux/actions';
 import {getDaynamicPostData} from './services'
@@ -105,6 +106,11 @@ function App({setMenus}) {
           <Route
             path="/wallet"
             component={_props => <Wallet {..._props} />}
+          />
+          <Route
+            path="/sky9-admin/"
+            exact
+            component={_props => <AdminRouter {..._props} />}
           />
           
           
