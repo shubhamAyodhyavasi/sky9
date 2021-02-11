@@ -24,6 +24,7 @@ function VideoDetails() {
     const [open, setOpen] = useState({ action: false, msg: '', type: false });
     const { id } = useParams()
     useEffect(() => {
+        window.scrollTo(0, 1);
         getData(id)
     }, [id]);
 
@@ -75,12 +76,12 @@ function VideoDetails() {
 
     const adsHandler = (record) => {
         const advertise_time = record?.album_dt?.advertise_time
-        // if (advertise_time == 0) {
-        //     // play advartise then video autoplay
-        //     // check ads video availablity
-        //     record.video_add.length > 0 && setShowAds(true)
+        if (advertise_time == 0) {
+            // play advartise then video autoplay
+            // check ads video availablity
+            record.video_add.length > 0 && setShowAds(true)
 
-        // }
+        }
         setVideoData(record)
 
     }
@@ -93,17 +94,17 @@ function VideoDetails() {
         }
 
     }
-    // const playMainVideoOnFinishAds = () => {
-    //     setShowAds(false)
-    //     setPlaying(true)
-    // }
-    //     const stopMainVideoAndPlayAds = (e) => {
-    //         const advertise_time = videoData?.album_dt?.advertise_time
-    //         if (advertise_time > 0 &&  parseInt(e.playedSeconds) == advertise_time ) {
-    //             setPlaying(false)
-    //             setShowAds(true)
-    //         }
-    //    }
+    const playMainVideoOnFinishAds = () => {
+        setShowAds(false)
+        setPlaying(true)
+    }
+        const stopMainVideoAndPlayAds = (e) => {
+            const advertise_time = videoData?.album_dt?.advertise_time
+            if (advertise_time > 0 &&  parseInt(e.playedSeconds) == advertise_time ) {
+                setPlaying(false)
+                setShowAds(true)
+            }
+       }
     const isPrimeVideo = () => {
 
 
@@ -157,7 +158,7 @@ function VideoDetails() {
                                             onEnded={addCoinAfterVideoEnd}
                                             url={videoData?.video_link ? `${IMG_URL}/${videoData?.video_link}` : "https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"}
                                             light={`${IMG_URL}/${videoData?.image}`}
-                                            // onProgress={(e) => { stopMainVideoAndPlayAds(e) }}
+                                            onProgress={(e) => { stopMainVideoAndPlayAds(e) }}
                                             config={{
                                                 file: {
                                                     attributes: {
@@ -166,10 +167,10 @@ function VideoDetails() {
                                                     },
 
                                                     nodownload: true,
-                                                    // tracks: [
-                                                    //     { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'en', default: true },
-                                                    //     { kind: 'subtitles', src: 'https://thepaciellogroup.github.io/AT-browser-tests/video/subtitles-en.vtt', srcLang: 'hi' }
-                                                    // ]
+                                                    tracks: [
+                                                        { kind: 'subtitles', src: `${IMG_URL}/${videoData?.subTitleEnglish}`, srcLang: 'english', default: true },
+                                                        { kind: 'subtitles', src: `${IMG_URL}/${videoData?.subTitleHindi}`, srcLang: 'hindi' }
+                                                    ]
                                                 }
                                             }}
                                         />
@@ -193,7 +194,7 @@ function VideoDetails() {
                         </Button>
                             </div>
                     }
-                    {/* {
+                    {
                         showAds &&
                         <div className={adsVideoClasses}>
                             <ReactPlayer
@@ -201,7 +202,7 @@ function VideoDetails() {
                                 playing={true}
                                 width="100%"
                                 onEnded={playMainVideoOnFinishAds}
-                                url="https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"
+                                url={videoData?.video_add[0] ? `${IMG_URL}/${videoData?.video_add[0]?.image}` : "https://thepaciellogroup.github.io/AT-browser-tests/video/ElephantsDream.mp4"}
                                 config={{
                                     file: {
                                         attributes: {
@@ -215,7 +216,7 @@ function VideoDetails() {
                                 }}
                             />
                         </div>
-                    } */}
+                    }
 
                     <div className="video-details-wrapper">
                         <div className="video-details-title">
@@ -266,7 +267,7 @@ function VideoDetails() {
                                         albumData?.map((data, index) =>
                                             <Grid key={index} item lg={2} md={3} sm={4} xs={6} >
                                                 <div key={index} className="video-details-more-video-cart">
-                                                    <span onClick={() => { setVideoData(data) }}>
+                                                    <span onClick={() => { setVideoData(data); window.scrollTo(0, 1);}}>
                                                         <img alt="" style={{ maxWidth: "100%" }} src={`${IMG_URL}/${data?.image}`} />
                                                         <h3>{data?.title}</h3>
                                                     </span>

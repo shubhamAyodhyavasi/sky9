@@ -58,7 +58,7 @@ export default function Reg() {
                             />
                             <TextField
                                 name="email"
-                                inputRef={register({ required: true, pattern: /^\S+@\S+$/i })}
+                                inputRef={register({ pattern: /^\S+@\S+$/i })}
                                 label="Enter email"
                                 margin="normal"
                                 variant="outlined"

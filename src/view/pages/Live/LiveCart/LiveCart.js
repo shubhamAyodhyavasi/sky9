@@ -4,7 +4,7 @@ import {PlayArrow} from '@material-ui/icons'
 import "./LiiveCart.scss";
 import { Button } from '@material-ui/core';
 
-export default function LiveCart({ albumDetails, isSmall }) {
+export default function LiveCart({ albumDetails, isSmall ,onSelectLiveInfo }) {
     const { title, img, totalView, id } = albumDetails
     const history = useHistory();
     return (
@@ -14,7 +14,8 @@ export default function LiveCart({ albumDetails, isSmall }) {
         // }}
         >
             <div onClick={()=>{
-                        history.push(`/live/${id}`)
+                onSelectLiveInfo(albumDetails)
+                        //history.push(`/live/${id}`)
                     }} className="live-cart-wrapper__image-wrap">
                 <img src={img} class="live-cart-wrapper__thumb" alt=""/>
                 {/* {totalView} */}
@@ -22,7 +23,8 @@ export default function LiveCart({ albumDetails, isSmall }) {
             {/* <img className="live-cart-wrapper__bg" alt={title} src={img} /> */}
             <div className="live-cart-wrapper__body">
                 <p onClick={()=>{
-                        history.push(`/live/${id}`)
+                    onSelectLiveInfo(albumDetails)
+                       // history.push(`/live/${id}`)
                     }} className="live-cart-wrapper__title">{title}</p>
                 <Button 
                     style={{

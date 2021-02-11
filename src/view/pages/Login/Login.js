@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { TextField, Typography, Button ,Snackbar} from '@material-ui/core';
+import { TextField, Typography, Button, Snackbar } from '@material-ui/core';
 import { useHistory } from 'react-router-dom'
 import Layout from '../../element/Layout'
+import { GoogleLogin } from 'react-google-login';
 import { getDaynamicPostData } from '../../../services/services'
 import "./Login.scss"
 export default function Login() {
@@ -38,7 +39,7 @@ export default function Login() {
                         <Typography variant="h4" >
                             Login
                     </Typography>
-                       
+
                         <div className="form-field-wrapper">
                             <TextField
                                 name="email"
@@ -68,18 +69,29 @@ export default function Login() {
                             Login
                         </Button>
                         <div className="login-footer-links">
-                        <Button color="primary" disabled>Not A Member Yet ?</Button>
-                        <Button color="secondary" onClick={()=> { history.push(`/register`)}}> Sign up for FREE</Button>
+                            <Button color="primary" disabled>Not A Member Yet ?</Button>
+                            <Button color="secondary" onClick={() => { history.push(`/register`) }}> Sign up for FREE</Button>
                         </div>
-                        
-                        
+                        <div style={{display:'none'}}>
+                            <GoogleLogin
+                                clientId="762245880186-f3pokmtogs0n3f03t72s74bsfgqjigtv.apps.googleusercontent.com"
+                                render={renderProps => (
+                                    <button onClick={renderProps.onClick} disabled={renderProps.disabled}>Google Login</button>
+                                )}
+                                buttonText="Login"
+                                onSuccess={(e) => { console.log('succ',{e})}}
+                                onFailure={(e) => {  console.log('succ',{e})}}
+                                cookiePolicy={'single_host_origin'}
+                            />
+                        </div>
+
                     </form>
                 </div>
             </div>
 
 
 
-              <Snackbar
+            <Snackbar
                 anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'right',
@@ -88,10 +100,10 @@ export default function Login() {
                 autoHideDuration={6000}
                 onClose={handleClose}
                 message={loginRes?.message}
-               // action={}
+            // action={}
             />
-            
-            
+
+
         </Layout>
 
     );

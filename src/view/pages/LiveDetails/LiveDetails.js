@@ -32,7 +32,7 @@ function LiveDetails() {
     }
    
     const convertIntoFormat = (itm) => {
-        console.log('xx',{itm})
+        
         const newdata = {
             ...itm,
             title: itm.title,

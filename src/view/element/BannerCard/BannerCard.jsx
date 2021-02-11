@@ -1,15 +1,17 @@
 import React from 'react'
 import {config} from '../../../constants'
-const IMG_URL= config.IMG_URL // "http://fantasymedia.in/sky9/"
-function BannerCard({image, title, onCLick}) {
+const IMG_URL= config.IMG_URL
+function BannerCard({image, title, onCLick ,album_id}) {
     return (
-        <div onClick={onCLick} className="banner-card" style={{
+        <a onClick={onCLick} className="coursePointer">
+        <div  className="banner-card" style={{
             backgroundImage: `url(${IMG_URL}/${image})`,
         }}>
             <div className="banner-card__item">
                 <h3>{title}</h3>
             </div>
         </div>
+        </a>
     )
 }
 

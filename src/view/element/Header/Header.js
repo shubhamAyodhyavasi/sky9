@@ -113,10 +113,10 @@ function Header({ menus }) {
       >
         <Toolbar>
           <div className="navigation-wrapper">
-            <Link onClick={() => {
+            <Link  onClick={() => {
               history.push("/")
             }} color="inherit" className="logo-link" >
-              <img width="90px" src={logo} alt={config.appName} />
+              <img width="90px" className="coursePointer" src={logo} alt={config.appName} />
             </Link>
             <div className="navigation-menu">
               <ul>

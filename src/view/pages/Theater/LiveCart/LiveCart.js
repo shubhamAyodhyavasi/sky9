@@ -8,7 +8,9 @@ export default function LiveCart({ albumDetails, isSmall }) {
     const { title, img, totalView, id } = albumDetails
     const history = useHistory();
     return (
-        <div className={`album-cart-wrapper ${isSmall ? "album-cart-wrapper--small" : ""}`} 
+        <div onClick={()=>{
+            history.push(`/theater/${id}`)
+        }} className={`album-cart-wrapper ${isSmall ? "album-cart-wrapper--small" : ""}`} 
         style={{
             backgroundImage: `url(${img})`,
         }}>

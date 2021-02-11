@@ -20,6 +20,7 @@ function TheaterDetails() {
     const { id } = useParams()
     const history = useHistory()
     useEffect(() => {
+        window.scrollTo(0, 1);
         getData(id)
     }, [id]);
 

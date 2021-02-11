@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardActionArea, CardActions, CardContent, Divider, CardMedia, Button, Typography } from '@material-ui/core';
 import config from '../../../constants/config'
 import Layout from '../../element/Layout'
+import { useHistory } from 'react-router-dom';
 import { getDaynamicPostData, getUserData } from '../../../services/services'
 import "./Membership.scss"
 const IMG_URL = config.IMG_URL
@@ -24,6 +25,7 @@ export default function Membership() {
     const [getMembership, setGetMembership] = useState([])
     const [singleMembership, setSingleMembership] = useState({})
     const [apiData, setApiData] = useState({})
+    const history = useHistory()
     useEffect(() => {
         const user_id = getUserData()?.user_id
         if (user_id) {
@@ -34,20 +36,25 @@ export default function Membership() {
                 .then(setGetMembership)
         }
 
-    }, []);
+        if(apiData && apiData?.message === "You have not sufficient coin for get this order"){
+            history.push("/wallet")
+        }
+
+    }, [apiData]);
     const addMembership = () => {
         const { mem_id } = singleMembership
         const user_id = getUserData().user_id
         getDaynamicPostData('updateMembershipUsingCoin', { user_id: user_id, mem_id: mem_id })
             .then(setApiData)
-
+            
+        
     }
     const setDefault = () => {
         setSingleMembership({})
         setApiData({})
     }
     const currentMembershipInfo = getMembership?.current_membership_info
-    console.log(currentMembershipInfo)
+  
     return (
         <Layout >
             {
@@ -110,7 +117,7 @@ export default function Membership() {
                                         <CardContent>
                                             <Typography gutterBottom variant="h5" alignt="align" component="h2">
                                                 {itm?.title}
-                                                </Typography>
+                                            </Typography>
                                             <Divider />
                                             <Typography gutterBottom variant="body2" component="p" alignt="align">
                                                 {itm?.price} Rs.
@@ -133,11 +140,11 @@ export default function Membership() {
                                             currentMembershipInfo?.length > 0 && currentMembershipInfo[0].memberShipId === itm.mem_id ?
                                                 <Button size="small" color="secondary">
                                                     Active ( Expire On {currentMembershipInfo[0].endDate} )
-                                 </Button>
+                                                  </Button>
                                                 :
                                                 <Button size="small" onClick={() => { setSingleMembership(itm) }} color="secondary">
-                                                    Get Membership
-                                 </Button>
+                                                   { !currentMembershipInfo?.length > 0 && 'Get Membership'} 
+                                                 </Button>
                                         }
 
                                         <Button size="small" color="primary">
@@ -148,8 +155,9 @@ export default function Membership() {
                             )
                         }
 
-                    </div>
 
+                    </div>
+                    
             }
 
 

@@ -9,5 +9,12 @@ export default (theme) => ({
   logoWrapper: {
     width: '100%',
     textAlign: 'center',
-  }
+  },
+  copyrightSection:{
+     display:'flex',
+     justifyContent: 'center'
+  },
+  copyrightSectionA:{
+    color:'#fff'
+ }
 })

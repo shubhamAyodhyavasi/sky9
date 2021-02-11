@@ -3,3 +3,22 @@
 @import '~slick-carousel/slick/slick-theme.scss';
 
 @import './styles/style.scss';
+
+.coursePointer{
+ cursor: pointer;
+}
+.form-coin-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.form-coin-button-wrapper{
+    margin: 10px;
+}
+.colorRed{
+    color:red
+}
+.form-coin{
+    padding: 10px;
+}

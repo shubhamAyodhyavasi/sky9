@@ -8,7 +8,7 @@ export default function AlbumCart({ albumDetails, isSmall }) {
     const { title, img, totalView, id } = albumDetails
     const history = useHistory();
     return (
-        <div className={`album-cart-wrapper ${isSmall ? "album-cart-wrapper--small" : ""}`} 
+        <div onClick={()=>{history.push(`/video/${id}`)}} className={`album-cart-wrapper coursePointer ${isSmall ? "album-cart-wrapper--small" : ""}`} 
         style={{
             backgroundImage: `url(${img})`,
         }}>
